@@ -8,20 +8,19 @@ class Login extends React.Component {
       password: '',
     };
 
-    this.onEmailChange = this.onEmailChange.bind(this);
-    this.onPasswordChange = this.onPasswordChange.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onEmailChange(ev) {
+  handleOnChange(ev) {
+    const {
+      target: {
+        name,
+        value,
+      },
+    } = ev;
     this.setState({
-      email: ev.target.value,
-    });
-  }
-
-  onPasswordChange(ev) {
-    this.setState({
-      password: ev.target.value,
+      [name]: value,
     });
   }
 
@@ -55,7 +54,7 @@ class Login extends React.Component {
         <label htmlFor="email">Email</label>
         <input
           name="email"
-          onChange={this.onEmailChange}
+          onChange={this.handleOnChange}
           spellCheck={false}
           type="email"
           value={email}
@@ -63,7 +62,7 @@ class Login extends React.Component {
         <label htmlFor="password">Password</label>
         <input
           name="password"
-          onChange={this.onPasswordChange}
+          onChange={this.handleOnChange}
           spellCheck={false}
           type="password"
           value={password}
