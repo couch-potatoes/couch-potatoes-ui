@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
   Route,
+  Switch,
 } from 'react-router-dom';
 
 import Home from './views/Home';
@@ -11,12 +12,12 @@ import ResetPassword from './views/ResetPassword';
 class App extends Component {
   render() {
     return (
-      <div>
-        <Route path="/" component={Home} />
+      <Switch>
+        <Route path="/" exact component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
         <Route path="/reset" component={ResetPassword} />
-      </div>
+      </Switch>
     );
   }
 }
