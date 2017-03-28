@@ -1,6 +1,7 @@
 import * as actions from '../actions/auth';
 
 const initialState = {
+  email: '',
   isLoggedIn: false,
 };
 

@@ -7,7 +7,8 @@ import createStore from './store';
 
 import App from './App';
 
-const store = createStore({ auth: { isLoggedIn: true, email: 'foo', }});
+const store = createStore();
+// const store = createStore({ auth: { isLoggedIn: true, email: 'foo', }});
 
 ReactDOM.render(
   <Provider store={store}>
