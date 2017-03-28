@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { login } from '../actions/auth';
 
 class Login extends Component {
   constructor(props) {
@@ -28,6 +31,11 @@ class Login extends Component {
     ev.preventDefault();
 
     const {
+      dispatch,
+      history,
+    } = this.props;
+
+    const {
       email,
       password,
     } = this.state;
@@ -35,11 +43,8 @@ class Login extends Component {
     if (!email || !password) {
       alert('Email and password are required');
     }
-
-    this.setState({
-      email: '',
-      password: '',
-    })
+    dispatch(login())
+    history.push('home')
   }
 
   render() {
@@ -74,7 +79,6 @@ class Login extends Component {
       </div>
     );
   }
-
 }
 
-export default Login;
+export default withRouter(connect()(Login));
