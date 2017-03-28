@@ -43,7 +43,7 @@ class Login extends Component {
     if (!email || !password) {
       alert('Email and password are required');
     }
-    dispatch(login())
+    dispatch(login(email, password))
     history.push('home')
   }
 

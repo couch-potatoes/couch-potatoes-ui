@@ -7,14 +7,12 @@ import createStore from './store';
 
 import App from './App';
 
-const store = createStore();
+const store = createStore({ auth: { isLoggedIn: true, email: 'foo', }});
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <div>
-        <App />
-      </div>
+    <Router basename="/">
+      <App />
     </Router>
   </Provider>,
   document.getElementById('root')

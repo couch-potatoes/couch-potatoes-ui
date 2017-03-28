@@ -10,12 +10,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: true,
+        email: action.payload.email,
       };
     }
     case actions.LOGOUT: {
       return {
         ...state,
         isLoggedIn: false,
+        email: '',
       };
     }
     default: {
