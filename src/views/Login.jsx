@@ -58,18 +58,14 @@ class Login extends Component {
     return (
       <div id="login-form">
         <h2>Login</h2>
-        <br/>
-        <label htmlFor="email">Email</label>
-        <br/>
         <TextField
           name="email"
           onChange={this.handleOnChange}
           spellCheck={false}
           type="email"
           value={email}
+          hintText="Email"
         />
-        <br/>
-        <label htmlFor="password">Password</label>
         <br/>
         <TextField
           name="password"
@@ -77,6 +73,7 @@ class Login extends Component {
           spellCheck={false}
           type="password"
           value={password}
+          hintText="Password"
         />
         <br/>
         <RaisedButton
