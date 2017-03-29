@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { login } from '../actions/auth';
 import { TextField } from 'material-ui';
+import {RaisedButton} from 'material-ui';
 
 class Login extends Component {
   constructor(props) {
@@ -55,9 +56,11 @@ class Login extends Component {
     } = this.state;
 
     return (
-      <div>
+      <div id="login-form">
         <h2>Login</h2>
+        <br/>
         <label htmlFor="email">Email</label>
+        <br/>
         <TextField
           name="email"
           onChange={this.handleOnChange}
@@ -65,7 +68,9 @@ class Login extends Component {
           type="email"
           value={email}
         />
+        <br/>
         <label htmlFor="password">Password</label>
+        <br/>
         <TextField
           name="password"
           onChange={this.handleOnChange}
@@ -73,9 +78,11 @@ class Login extends Component {
           type="password"
           value={password}
         />
-        <input
+        <br/>&nbsp;
+        <RaisedButton
           onClick={this.onSubmit}
           type="submit"
+          label="Login"
         />
       </div>
     );
