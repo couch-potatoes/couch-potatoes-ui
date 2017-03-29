@@ -29,7 +29,6 @@ export class Home extends Component {
       </div>
     );
   }
-
 }
 
 export default withRouter(connect()(Home));
