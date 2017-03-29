@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { logout } from '../actions/auth';
-import {RaisedButton} from 'material-ui';
+import {RaisedButton, Paper} from 'material-ui';
 
 export class Home extends Component {
   constructor(props) {
@@ -21,11 +21,21 @@ export class Home extends Component {
   }
   render() {
     return (
-      <div id="home-page-wrapper">
-        <div class="page-title">Athletic Tracker App</div>
+      <div>
+        <div className="page-title">Athletic Tracker App</div>
 
-        <div class="section-title"><Link to="/status">Status Log</Link></div>
-        <div class="section-title"><Link to="/profile">Profile</Link></div>
+        <Link to="/status">
+        <Paper 
+          children = {"Status Log"}
+          className = "link-paper"
+        />
+        </Link>
+        <Link to="/profile" className="paper-link">
+        <Paper
+          children = {"Profile"}
+          className = "link-paper"
+        />
+        </Link>
         <RaisedButton onClick={this.handleOnClick} label="Logout" />
       </div>
     );
