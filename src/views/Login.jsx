@@ -77,7 +77,7 @@ class Login extends Component {
         />
         <br/>
         <RaisedButton
-          onClick={this.onSubmit}
+          onTouchTap={this.onSubmit}
           type="submit"
           label="Login"
         />
