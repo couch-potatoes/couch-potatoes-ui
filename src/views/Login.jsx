@@ -78,7 +78,7 @@ class Login extends Component {
           type="password"
           value={password}
         />
-        <br/>&nbsp;
+        <br/>
         <RaisedButton
           onClick={this.onSubmit}
           type="submit"
