@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { login } from '../actions/auth';
+import { TextField } from 'material-ui';
 
 class Login extends Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class Login extends Component {
       <div>
         <h2>Login</h2>
         <label htmlFor="email">Email</label>
-        <input
+        <TextField
           name="email"
           onChange={this.handleOnChange}
           spellCheck={false}
@@ -65,7 +66,7 @@ class Login extends Component {
           value={email}
         />
         <label htmlFor="password">Password</label>
-        <input
+        <TextField
           name="password"
           onChange={this.handleOnChange}
           spellCheck={false}
