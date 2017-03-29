@@ -24,11 +24,10 @@ export class Home extends Component {
 
         <h2><Link to="/status">Status Log</Link></h2>
         <h2><Link to="/profile">Profile</Link></h2>
-        <h3 onClick={this.handleOnClick}>Logout</h3>
+        <button onClick={this.handleOnClick}>Logout</button>
       </div>
     );
   }
-
 }
 
 export default withRouter(connect()(Home));
