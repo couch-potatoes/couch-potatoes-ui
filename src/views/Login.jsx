@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { login } from '../actions/auth';
 import { TextField } from 'material-ui';
 import {RaisedButton} from 'material-ui';
+import styles from '../views/css/login.css';
 
 class Login extends Component {
   constructor(props) {
@@ -57,7 +58,7 @@ class Login extends Component {
 
     return (
       <div id="login-form">
-        <h2>Login</h2>
+        <div className="page-title">Login</div>
         <TextField
           name="email"
           onChange={this.handleOnChange}
@@ -75,7 +76,7 @@ class Login extends Component {
           value={password}
           hintText="Password"
         />
-        <br/>
+        <br/><br/>
         <RaisedButton
           onTouchTap={this.onSubmit}
           type="submit"

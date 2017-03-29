@@ -10,6 +10,7 @@ export class Home extends Component {
     super(props);
     this.handleOnClick = this.handleOnClick.bind(this);
   }
+
   handleOnClick() {
     const {
       dispatch,
@@ -20,11 +21,11 @@ export class Home extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>Athletic Tracker App</h1>
+      <div id="home-page-wrapper">
+        <div class="page-title">Athletic Tracker App</div>
 
-        <h2><Link to="/status">Status Log</Link></h2>
-        <h2><Link to="/profile">Profile</Link></h2>
+        <div class="section-title"><Link to="/status">Status Log</Link></div>
+        <div class="section-title"><Link to="/profile">Profile</Link></div>
         <RaisedButton onClick={this.handleOnClick} label="Logout" />
       </div>
     );
