@@ -14,7 +14,7 @@ class Login extends Component {
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
-    this.handleOnSubmit = this.handleOnSubmit.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   handleOnChange(ev) {
@@ -29,7 +29,7 @@ class Login extends Component {
     });
   }
 
-  handleOnSubmit(ev) {
+  onSubmit(ev) {
     ev.preventDefault();
 
     const {
@@ -56,7 +56,7 @@ class Login extends Component {
     } = this.state;
 
     return (
-      <form id="login-form">
+      <div id="login-form">
         <h2>Login</h2>
         <TextField
           name="email"
@@ -77,11 +77,11 @@ class Login extends Component {
         />
         <br/>
         <RaisedButton
-          onSubmit={this.handleOnSubmit}
+          onClick={this.onSubmit}
           type="submit"
           label="Login"
         />
-      </form>
+      </div>
     );
   }
 }
