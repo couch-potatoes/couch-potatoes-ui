@@ -11,18 +11,18 @@ import { logout } from '../actions/auth';
 class CouchPotatoAppBar extends Component {
   constructor(props) {
     super(props);
-    this.signIn = this.signIn.bind(this);
+    this.routeToHome = this.routeToHome.bind(this);
     this.signOut = this.signOut.bind(this);
   }
-  signIn() {
-    history.push('/login');
+  routeToHome() {
+    const { history } = this.props;
+    history.push('/');
   }
   signOut() {
     const { dispatch, history } = this.props;
     dispatch(logout());
     history.push('/login');
   };
-
   render() {
     const {
       isLoggedIn,
@@ -32,6 +32,7 @@ class CouchPotatoAppBar extends Component {
         <AppBar
           title="Athlete Tracker Program"
           iconElementRight={isLoggedIn ? <Menu signOut={this.signOut} /> : <Login />}
+          onTitleTouchTap={this.routeToHome}
           showMenuIconButton={false}
         />
       </div>
