@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import {
+  Divider,
+  RaisedButton,
+  Paper,
+  TextField,
+} from 'material-ui';
+
 import { login } from '../actions/auth';
-import { TextField } from 'material-ui';
-import {RaisedButton} from 'material-ui';
 
 class Login extends Component {
   constructor(props) {
@@ -44,6 +49,7 @@ class Login extends Component {
 
     if (!email || !password) {
       alert('Email and password are required');
+      return;
     }
     dispatch(login(email, password))
     history.push('home')
@@ -57,30 +63,32 @@ class Login extends Component {
 
     return (
       <div id="login-form">
-        <div className="page-title">Login</div>
-        <TextField
-          name="email"
-          onChange={this.handleOnChange}
-          spellCheck={false}
-          type="email"
-          value={email}
-          hintText="Email"
-        />
-        <br/>
-        <TextField
-          name="password"
-          onChange={this.handleOnChange}
-          spellCheck={false}
-          type="password"
-          value={password}
-          hintText="Password"
-        />
-        <br/><br/>
-        <RaisedButton
-          onTouchTap={this.onSubmit}
-          type="submit"
-          label="Login"
-        />
+        <Paper className="link-paper">
+          <TextField
+            name="email"
+            onChange={this.handleOnChange}
+            spellCheck={false}
+            type="email"
+            value={email}
+            hintText="Email"
+          />
+          <Divider />
+          <TextField
+            name="password"
+            onChange={this.handleOnChange}
+            spellCheck={false}
+            type="password"
+            value={password}
+            hintText="Password"
+          />
+          <Divider />
+          <RaisedButton
+            onTouchTap={this.onSubmit}
+            primary
+            type="submit"
+            label="Login"
+          />
+        </Paper>
       </div>
     );
   }
