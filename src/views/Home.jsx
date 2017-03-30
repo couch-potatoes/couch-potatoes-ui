@@ -8,14 +8,14 @@ import {RaisedButton, Paper} from 'material-ui';
 export class Home extends Component {
   constructor(props) {
     super(props);
-    this.handleOnClick = this.handleOnClick.bind(this);
+    this.handleOnClick=this.handleOnClick.bind(this);
   }
 
   handleOnClick() {
     const {
       dispatch,
       history,
-    } = this.props;
+    }=this.props;
     dispatch(logout());
     history.push('/login');
   }
@@ -26,14 +26,14 @@ export class Home extends Component {
 
         <Link to="/status">
         <Paper 
-          children = {"Status Log"}
-          className = "link-paper"
+          children={"Status Log"}
+          className="link-paper"
         />
         </Link>
         <Link to="/profile" className="paper-link">
         <Paper
-          children = {"Profile"}
-          className = "link-paper"
+          children={"Profile"}
+          className="link-paper"
         />
         </Link>
         <RaisedButton onClick={this.handleOnClick} label="Logout" />

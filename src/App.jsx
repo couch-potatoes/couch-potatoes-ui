@@ -12,7 +12,6 @@ import Login from './views/Login';
 import NotFound from './views/NotFound';
 import Profile from './views/Profile';
 import StatusLog from './views/StatusLog';
-import styles from './views/style.css';
 
 const App = () => (
   <div>
