@@ -1,0 +1,21 @@
+#login-form {
+    padding: 1em;
+    display: block;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 2em;
+    padding: 1em;
+    text-align: center;
+}
+
+.link-paper {
+    width: 45%;
+    margin: 1em;
+    padding: 1em;
+    float: left;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+}

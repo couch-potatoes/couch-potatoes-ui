@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { login } from '../actions/auth';
 import { TextField } from 'material-ui';
+import {RaisedButton} from 'material-ui';
 
 class Login extends Component {
   constructor(props) {
@@ -55,27 +56,30 @@ class Login extends Component {
     } = this.state;
 
     return (
-      <div>
-        <h2>Login</h2>
-        <label htmlFor="email">Email</label>
+      <div id="login-form">
+        <div className="page-title">Login</div>
         <TextField
           name="email"
           onChange={this.handleOnChange}
           spellCheck={false}
           type="email"
           value={email}
+          hintText="Email"
         />
-        <label htmlFor="password">Password</label>
+        <br/>
         <TextField
           name="password"
           onChange={this.handleOnChange}
           spellCheck={false}
           type="password"
           value={password}
+          hintText="Password"
         />
-        <input
-          onClick={this.onSubmit}
+        <br/><br/>
+        <RaisedButton
+          onTouchTap={this.onSubmit}
           type="submit"
+          label="Login"
         />
       </div>
     );
