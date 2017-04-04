@@ -51,8 +51,8 @@ class Login extends Component {
       alert('Email and password are required');
       return;
     }
-    dispatch(login(email, password))
-    history.push('home')
+    dispatch(login(email, password));
+    history.push('home');
   }
 
   render() {
@@ -65,28 +65,30 @@ class Login extends Component {
       <div id="login-form">
         <Paper className="link-paper">
           <TextField
+            fullWidth
+            hintText="Email"
             name="email"
             onChange={this.handleOnChange}
             spellCheck={false}
             type="email"
             value={email}
-            hintText="Email"
           />
           <Divider />
           <TextField
+            fullWidth
+            hintText="Password"
             name="password"
             onChange={this.handleOnChange}
             spellCheck={false}
             type="password"
             value={password}
-            hintText="Password"
           />
           <Divider />
           <RaisedButton
+            label="Login"
             onTouchTap={this.onSubmit}
             primary
             type="submit"
-            label="Login"
           />
         </Paper>
       </div>
