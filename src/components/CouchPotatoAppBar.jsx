@@ -20,9 +20,10 @@ class CouchPotatoAppBar extends Component {
   }
   signOut() {
     const { dispatch, history } = this.props;
-    dispatch(logout());
-    history.push('/login');
-  };
+    dispatch(logout())
+      .then(() => { history.push('/login') })
+      .catch((err) => {console.log(err);});
+  }
   render() {
     const {
       isLoggedIn,

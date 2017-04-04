@@ -3,21 +3,22 @@ import axios from 'axios';
 export const LOGIN = 'LOGIN';
 export const LOGIN_SUCCEEDED = 'LOGIN_SUCCEEDED';
 export const LOGOUT = 'LOGOUT';
+export const INVALIDATE_CREDENTIALS = 'INVALIDATE_CREDENTIALS';
 
-const AUTH_URL = `${process.env.REACT_APP_API_URL}/Users/login`;
+const AUTH_URL = `${process.env.REACT_APP_API_URL}Users`;
 
 export const login = (email, password) => {
   return (dispatch) => {
     return axios({
       method: 'POST',
-      url: AUTH_URL,
+      url: `${AUTH_URL}/login`,
       data: {
         email,
         password
       },
     }).then((res) => {
-      const { token, userId } = res.data;
-      dispatch(loginSucceeded(token, userId))
+      const { id: token, userId } = res.data;
+      dispatch(loginSucceeded(token, userId));
     }, (err) => {
       console.log(err);
     });
@@ -32,6 +33,17 @@ export const loginSucceeded = (token, userId) => ({
   },
 });
 
-export const logout = () => ({
-  type: LOGOUT,
+const invalidateCredentials = () => ({
+  type: INVALIDATE_CREDENTIALS,
 });
+
+export const logout = () => {
+  return (dispatch, getState) => {
+    const { auth: { token } } = getState();
+    dispatch(invalidateCredentials());
+    return axios({
+      method: 'POST',
+      url: `${AUTH_URL}/logout?access_token=${token}`,
+    });
+  };
+};

@@ -9,17 +9,17 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+  case actions.INVALIDATE_CREDENTIALS: {
+    return {
+      ...initialState
+    };
+  }
   case actions.LOGIN_SUCCEEDED: {
     return {
       ...state,
       isLoggedIn: true,
       token: action.payload.token,
       userId: action.payload.userId,
-    };
-  }
-  case actions.LOGOUT: {
-    return {
-      ...initialState
     };
   }
   default: {
