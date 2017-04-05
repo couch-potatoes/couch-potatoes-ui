@@ -30,6 +30,15 @@ module.exports = {
         "semi": [
             1,
             "always"
+        ],
+        "react/prop-types": [
+          1,
+          {
+            "ignore": [
+              "history",
+              "dispatch",
+            ]
+          }
         ]
     }
 };

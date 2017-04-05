@@ -10,7 +10,6 @@ class Profile extends React.Component {
     }=this.props;
     return (
       <div id="profile-information">
-        <div className="page-title">User Profile</div>
         <List>
           <ListItem
              primaryText="Email"
@@ -75,9 +74,9 @@ const mapStateToProps=(state) => {
       username,
       age,
       grade,
-      gender, 
-      height, 
-      weight, 
+      gender,
+      height,
+      weight,
       sport,
       exp_grd        //expected graduation date
       */

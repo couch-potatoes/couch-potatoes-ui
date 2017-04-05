@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import {
+  Divider,
+  RaisedButton,
+  Paper,
+  TextField,
+} from 'material-ui';
+
 import { login } from '../actions/auth';
-import { TextField } from 'material-ui';
-import {RaisedButton} from 'material-ui';
 
 class Login extends Component {
   constructor(props) {
@@ -44,9 +49,10 @@ class Login extends Component {
 
     if (!email || !password) {
       alert('Email and password are required');
+      return;
     }
-    dispatch(login(email, password))
-    history.push('home')
+    dispatch(login(email, password));
+    history.push('home');
   }
 
   render() {
@@ -57,30 +63,34 @@ class Login extends Component {
 
     return (
       <div id="login-form">
-        <div className="page-title">Login</div>
-        <TextField
-          name="email"
-          onChange={this.handleOnChange}
-          spellCheck={false}
-          type="email"
-          value={email}
-          hintText="Email"
-        />
-        <br/>
-        <TextField
-          name="password"
-          onChange={this.handleOnChange}
-          spellCheck={false}
-          type="password"
-          value={password}
-          hintText="Password"
-        />
-        <br/><br/>
-        <RaisedButton
-          onTouchTap={this.onSubmit}
-          type="submit"
-          label="Login"
-        />
+        <Paper className="link-paper">
+          <TextField
+            fullWidth
+            hintText="Email"
+            name="email"
+            onChange={this.handleOnChange}
+            spellCheck={false}
+            type="email"
+            value={email}
+          />
+          <Divider />
+          <TextField
+            fullWidth
+            hintText="Password"
+            name="password"
+            onChange={this.handleOnChange}
+            spellCheck={false}
+            type="password"
+            value={password}
+          />
+          <Divider />
+          <RaisedButton
+            label="Login"
+            onTouchTap={this.onSubmit}
+            primary
+            type="submit"
+          />
+        </Paper>
       </div>
     );
   }

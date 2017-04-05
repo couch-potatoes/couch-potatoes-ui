@@ -9,6 +9,7 @@ const Menu = ({ signOut }) => (
     iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+    useLayerForClickAway
   >
     <MenuItem onTouchTap={signOut} primaryText="Sign out" />
   </IconMenu>
