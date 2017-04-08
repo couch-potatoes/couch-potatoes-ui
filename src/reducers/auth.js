@@ -3,26 +3,27 @@ import * as actions from '../actions/auth';
 const initialState = {
   email: '',
   isLoggedIn: false,
+  token: '',
+  userId: '',
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actions.LOGIN: {
-      return {
-        ...state,
-        isLoggedIn: true,
-        email: action.payload.email,
-      };
-    }
-    case actions.LOGOUT: {
-      return {
-        ...state,
-        isLoggedIn: false,
-        email: '',
-      };
-    }
-    default: {
-      return state;
-    }
+  case actions.INVALIDATE_CREDENTIALS: {
+    return {
+      ...initialState
+    };
   }
-}
+  case actions.LOGIN_SUCCEEDED: {
+    return {
+      ...state,
+      isLoggedIn: true,
+      token: action.payload.token,
+      userId: action.payload.userId,
+    };
+  }
+  default: {
+    return state;
+  }
+  }
+};

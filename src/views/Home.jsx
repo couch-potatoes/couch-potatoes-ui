@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { logout } from '../actions/auth';
-import { RaisedButton, Paper } from 'material-ui';
+import { Paper } from 'material-ui';
 
 export class Home extends Component {
   constructor(props) {

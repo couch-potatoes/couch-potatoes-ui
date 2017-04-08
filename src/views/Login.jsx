@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {
-  Divider,
   RaisedButton,
   Paper,
   TextField,
@@ -51,8 +50,12 @@ class Login extends Component {
       alert('Email and password are required');
       return;
     }
-    dispatch(login(email, password));
-    history.push('home');
+    dispatch(login(email, password))
+      .then(() => {
+        history.push('home');
+      }, () => {
+        alert('Invalid Credentials');
+      });
   }
 
   render() {
@@ -73,7 +76,6 @@ class Login extends Component {
             type="email"
             value={email}
           />
-          <Divider />
           <TextField
             fullWidth
             hintText="Password"
@@ -83,7 +85,6 @@ class Login extends Component {
             type="password"
             value={password}
           />
-          <Divider />
           <RaisedButton
             label="Login"
             onTouchTap={this.onSubmit}
