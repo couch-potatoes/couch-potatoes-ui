@@ -1,49 +1,83 @@
 import axios from 'axios';
+import { makeAPIEndpoint } from '../util/api';
 
 export const LOGIN = 'LOGIN';
-export const LOGIN_SUCCEEDED = 'LOGIN_SUCCEEDED';
+export const SAVE_USER_CREDENTIALS = 'SAVE_USER_CREDENTIALS';
 export const LOGOUT = 'LOGOUT';
-export const INVALIDATE_CREDENTIALS = 'INVALIDATE_CREDENTIALS';
+export const INVALIDATE_USER_CREDENTIALS = 'INVALIDATE_USER_CREDENTIALS';
+export const SAVE_PROFILE_TO_STATE = 'SAVE_PROFILE_TO_STATE';
 
-const AUTH_URL = `${process.env.REACT_APP_API_URL}Users`;
+const participantEndpoint = makeAPIEndpoint('Participants');
 
-export const login = (email, password) => {
-  return (dispatch) => {
-    return axios({
-      method: 'POST',
-      url: `${AUTH_URL}/login`,
-      data: {
-        email,
-        password
-      },
-    }).then((res) => {
-      const { id: token, userId } = res.data;
-      dispatch(loginSucceeded(token, userId));
-    }, (err) => {
-      console.log(err);
-    });
-  };
-};
-
-export const loginSucceeded = (token, userId) => ({
-  type: LOGIN_SUCCEEDED,
+export const saveUserCredentials = (token, userId) => ({
+  type: SAVE_USER_CREDENTIALS,
   payload: {
     token,
     userId,
   },
 });
 
-const invalidateCredentials = () => ({
-  type: INVALIDATE_CREDENTIALS,
+export const login = (email, password) => {
+  return (dispatch) => {
+    return axios({
+      method: 'POST',
+      url: `${participantEndpoint}/login`,
+      data: {
+        email,
+        password
+      },
+    }).then((res) => {
+      const { id: token, userId } = res.data;
+      dispatch(saveUserCredentials(token, userId));
+    });
+  };
+};
+
+const invalidateUserCredentials = () => ({
+  type: INVALIDATE_USER_CREDENTIALS,
 });
 
 export const logout = () => {
   return (dispatch, getState) => {
-    const { auth: { token } } = getState();
-    dispatch(invalidateCredentials());
+    const { account: { token } } = getState();
+    dispatch(invalidateUserCredentials());
     return axios({
       method: 'POST',
-      url: `${AUTH_URL}/logout?access_token=${token}`,
+      headers: {
+        Authorization: token
+      },
+      url: `${participantEndpoint}/logout`,
+    });
+  };
+};
+
+export const registerParticipant = (accountData) => {
+  return (dispatch) => {
+    return axios({
+      method: 'POST',
+      url: participantEndpoint,
+      data: accountData,
+    })
+      .then(() => {
+        // Log the user in if registration was successful
+        const { email, password } = accountData;
+        return dispatch(login(email, password));
+      }, (err) => {
+        throw err;
+      });
+  };
+};
+
+export const updateParticipant = (accountData) => {
+  return (dispatch, getState) => {
+    const { account: { token, userId } } = getState();
+    return axios({
+      method: 'PUT',
+      url: `${participantEndpoint}/${userId}`,
+      data: accountData,
+      headers: {
+        Authorization: token,
+      },
     });
   };
 };

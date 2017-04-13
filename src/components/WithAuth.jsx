@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
@@ -20,7 +20,7 @@ class WithAuth extends React.Component {
 
 const mapStateToProps = (state) => {
   const {
-    auth: {
+    account: {
       isLoggedIn,
     },
   } = state;
@@ -28,6 +28,10 @@ const mapStateToProps = (state) => {
   return {
     isLoggedIn,
   };
-}
+};
+
+WithAuth.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+};
 
 export default connect(mapStateToProps)(WithAuth);

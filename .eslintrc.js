@@ -3,6 +3,7 @@ module.exports = {
         "browser": true,
         "es6": true,
         "jest": true,
+        "node": true
     },
     "extends": ["eslint:recommended", "plugin:react/recommended"],
     "parserOptions": {
@@ -31,6 +32,17 @@ module.exports = {
         "semi": [
             1,
             "always"
+        ],
+        "react/prop-types": [
+          1,
+          {
+            "ignore": [
+              "children",
+              "dispatch",
+              "history",
+              "styles"
+            ]
+          }
         ]
     }
 };

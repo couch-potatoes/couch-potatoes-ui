@@ -1,7 +1,28 @@
-#login-form {
+#root {
+    font-family: sans-serif;
+}
+
+#login-form, #pass-res-form{
     padding: 1em;
     display: block;
     text-align: center;
+}
+
+#login-form .login-form-button{
+    margin: 5px;
+    min-width: 20em;
+}
+
+#login-form .login-form-link{
+    padding-top: 1em;
+    color: grey;
+}
+
+#registration-wrapper {
+    padding: 2em;
+    max-width: 60em;
+    display: block;
+    margin: 0 auto;
 }
 
 .page-title {
@@ -12,10 +33,31 @@
 
 .link-paper {
     width: 45%;
-    margin: 1em;
-    padding: 1em;
-    float: left;
+    margin: auto;
+    padding: 1rem;
     text-align: center;
     text-decoration: none;
-    display: block;
+    min-width: 20em;
+}
+
+.login-button {
+    color: white;
+}
+
+.fullwidth-dropdown{
+    width: 100% !important;
+}
+
+.fullwidth-dropdown div {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin: 0 !important;
+}
+
+.fullwidth-dropdown button {
+    right: 0 !important;
+}
+
+.inline-button {
+    margin: 1em !important;
 }
