@@ -1,0 +1,58 @@
+import axios from 'axios';
+import _ from 'lodash';
+
+import { makeAPIEndpoint } from '../util/api';
+
+export const SAVE_PROFILE_TO_STATE = 'SAVE_PROFILE_TO_STATE';
+
+const makeProfileEndpoint = _.memoize((userId) => makeAPIEndpoint(`Participant/${userId}/participantProfile`));
+
+export const saveProfileToState = (profile) => ({
+  type: SAVE_PROFILE_TO_STATE,
+  payload: {
+    profile,
+  },
+});
+
+export const getProfile = () => {
+  return (dispatch, getState) => {
+    const { token, userId } = getState().account;
+    return axios({
+      method: 'GET',
+      headers: {
+        Authorization: token,
+      },
+      url: makeProfileEndpoint(userId),
+    });
+  };
+};
+
+export const updateProfile = (profile) => {
+  return (dispatch, getState) => {
+    const { token, userId } = getState().account;
+
+    return axios({
+      method: 'PUT',
+      headers: {
+        Authorization: token,
+      },
+      url: makeProfileEndpoint(userId),
+      data: profile
+    });
+  };
+};
+
+export const createProfile = (profile) => {
+  return (dispatch, getState) => {
+    const { token, userId } = getState().account;
+
+    return axios({
+      method: 'POST',
+      headers: {
+        Authorization: token,
+      },
+      url: makeProfileEndpoint(userId),
+      data: profile
+    });
+  };
+};

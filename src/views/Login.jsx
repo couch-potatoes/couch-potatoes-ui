@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { login } from '../actions/auth';
 import {
   RaisedButton,
   Paper,
   TextField,
 } from 'material-ui';
-
-import { login } from '../actions/auth';
 
 class Login extends Component {
   constructor(props) {
@@ -86,11 +85,26 @@ class Login extends Component {
             value={password}
           />
           <RaisedButton
+            className="inline-button"
             label="Login"
             onTouchTap={this.onSubmit}
             primary
             type="submit"
           />
+          <br/>
+          <Link 
+            to="/register" 
+            className="login-form-link"
+          >
+            Register A New Account
+          </Link>
+          <br/><br/>
+          <Link 
+            to="/pass-forgot" 
+            className="login-form-link"
+          >
+            Forgot Password?
+          </Link>
         </Paper>
       </div>
     );

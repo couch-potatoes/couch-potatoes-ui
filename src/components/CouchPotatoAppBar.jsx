@@ -21,8 +21,7 @@ class CouchPotatoAppBar extends Component {
   signOut() {
     const { dispatch, history } = this.props;
     dispatch(logout())
-      .then(() => { history.push('/login') })
-      .catch((err) => {console.log(err);});
+      .then(() => { history.push('/login'); });
   }
   render() {
     const {
@@ -39,7 +38,7 @@ class CouchPotatoAppBar extends Component {
       </div>
     );
   }
-};
+}
 
 CouchPotatoAppBar.propTypes = {
   dispatch: PropTypes.func.isRequired,
@@ -48,7 +47,7 @@ CouchPotatoAppBar.propTypes = {
 
 const mapStateToProps = (state) => {
   const {
-    auth: {
+    account: {
       isLoggedIn,
     },
   } = state;

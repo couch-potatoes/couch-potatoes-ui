@@ -1,0 +1,11 @@
+exports[`<WithAuth /> matches snapshot when user is logged in 1`] = `
+<h1>
+  foo
+</h1>
+`;
+
+exports[`<WithAuth /> matches snapshot when user is not logged in 1`] = `
+<Redirect
+  push={false}
+  to="login" />
+`;

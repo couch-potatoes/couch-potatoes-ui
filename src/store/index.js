@@ -9,7 +9,7 @@ import rootReducer from '../reducers';
 
 const createStoreWithMiddleware = applyMiddleware(
   thunk,
-  logger,
+  logger
 )(createStore);
 
 export default (initialState) => {

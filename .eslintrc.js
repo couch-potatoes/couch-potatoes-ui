@@ -1,7 +1,9 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest": true,
+        "node": true
     },
     "extends": ["eslint:recommended", "plugin:react/recommended"],
     "parserOptions": {
@@ -35,8 +37,10 @@ module.exports = {
           1,
           {
             "ignore": [
-              "history",
+              "children",
               "dispatch",
+              "history",
+              "styles"
             ]
           }
         ]
