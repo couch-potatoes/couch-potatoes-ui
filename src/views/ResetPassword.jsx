@@ -59,16 +59,16 @@ class ResetPassword extends React.Component {
       return;
     }
 
-    console.log(
-      newPassword
-    );
-
-    alert("Password Reset Success!");
+    alert('Password Reset Success!');
 
     history.push('login');
   }
 
   render() {
+    const {
+      newPassword,
+      confPassword,
+    } = this.state;
     return (
       <div id="pass-res-form">
         <div className="page-title"> Password Reset </div>
@@ -76,14 +76,13 @@ class ResetPassword extends React.Component {
 
           <TextField
             fullWidth
-            floatingLabelText="New Password"
             name="newPassword"
             onChange={this.handleOnChange}
             spellCheck={false}
             type="password"
-            value={this.state.newPassword}
+            value={newPassword}
           />
-          
+
           <TextField
             fullWidth
             floatingLabelText="Confirm Password"
@@ -91,7 +90,7 @@ class ResetPassword extends React.Component {
             onChange={this.handleOnChange}
             spellCheck={false}
             type="password"
-            value={this.state.confPassword}
+            value={confPassword}
           />
 
           <RaisedButton

@@ -7,7 +7,7 @@ const initialState = {
   profile: {},
 };
 
-export default (state = initialState, { type, payload}) => {
+export default (state = initialState, { type, payload }) => {
   switch (type) {
   case actions.INVALIDATE_USER_CREDENTIALS: {
     return {

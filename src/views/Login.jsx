@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { login } from '../actions/auth';
 import {
-  RaisedButton,
   Paper,
+  RaisedButton,
   TextField,
 } from 'material-ui';
+
+import { login } from '../actions/auth';
+import { getProfile, saveProfileToState } from '../actions/profile';
+
+const validateState = ({ email, password }) => {
+  return !!(email && password);
+};
 
 class Login extends Component {
   constructor(props) {
@@ -18,6 +24,10 @@ class Login extends Component {
 
     this.handleOnChange = this.handleOnChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.email.focus();
   }
 
   handleOnChange(ev) {
@@ -45,16 +55,35 @@ class Login extends Component {
       password,
     } = this.state;
 
-    if (!email || !password) {
-      alert('Email and password are required');
+    if (!validateState(this.state)) {
+      alert('Email and password required');
       return;
     }
+
     dispatch(login(email, password))
       .then(() => {
-        history.push('home');
-      }, () => {
-        alert('Invalid Credentials');
-      });
+        dispatch(getProfile())
+          .then(({ data: profile }) => {
+            dispatch(saveProfileToState(profile));
+            history.push('/');
+          })
+          .catch((error) => {
+            const {
+              response: {
+                status,
+              },
+            } = error;
+            // Profile not found; make user create one
+            if (status === 404) {
+              history.push('/profile');
+            } else {
+              alert('Error logging in; try again');
+            }
+          });
+      })
+        .catch(() => {
+          alert('Invalid Credentials');
+        });
   }
 
   render() {
@@ -71,6 +100,7 @@ class Login extends Component {
             hintText="Email"
             name="email"
             onChange={this.handleOnChange}
+            ref={(email) => { this.email = email; }}
             spellCheck={false}
             type="email"
             value={email}
@@ -85,22 +115,22 @@ class Login extends Component {
             value={password}
           />
           <RaisedButton
+            disabled={!validateState(this.state)}
             className="inline-button"
             label="Login"
             onTouchTap={this.onSubmit}
             primary
             type="submit"
           />
-          <br/>
-          <Link 
-            to="/register" 
-            className="login-form-link"
-          >
-            Register A New Account
-          </Link>
+          <RaisedButton
+            className="inline-button"
+            label="Register"
+            href="/register"
+            primary
+          />
           <br/><br/>
-          <Link 
-            to="/pass-forgot" 
+          <Link
+            to="/pass-forgot"
             className="login-form-link"
           >
             Forgot Password?

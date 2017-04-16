@@ -14,16 +14,14 @@ import NotFound from './views/NotFound';
 import Profile from './views/Profile';
 import StatusLog from './views/StatusLog';
 import ResetPassword from './views/ResetPassword';
-import ForgotPassword from './views/ForgotPassword';
 
 const App = () => (
   <div>
     <CouchPotatoAppBar />
     <Switch>
       <Route exact path="/" render={() => <WithAuth><Home /></WithAuth>} />
-      <Route exact path="/(home)" render={() => <WithAuth><Home /></WithAuth>} />
       <Route path="/login" component={Login} />
-      <Route path="/pass-forgot" component={ForgotPassword} />
+      <Route path="/reset-password" component={ResetPassword} />
       <Route path="/register" component={Register} />
       <Route path="/profile" render={() => <WithAuth><Profile /></WithAuth>} />
       <Route path="/status" render={() => <WithAuth><StatusLog /></WithAuth>} />

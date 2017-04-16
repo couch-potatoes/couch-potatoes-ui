@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-class WithAuth extends React.Component {
+export class WithAuth extends React.Component {
   render() {
     const {
       children,

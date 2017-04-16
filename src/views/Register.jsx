@@ -63,7 +63,7 @@ class Profile extends React.Component {
     }
     dispatch(registerParticipant({email, password}))
       .then(() => {
-        history.push('/home');
+        history.push('/profile');
       });
 
   }

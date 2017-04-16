@@ -5,7 +5,7 @@ import { makeAPIEndpoint } from '../util/api';
 
 export const SAVE_PROFILE_TO_STATE = 'SAVE_PROFILE_TO_STATE';
 
-const makeProfileEndpoint = _.memoize((userId) => makeAPIEndpoint(`Participant/${userId}/participantProfile`));
+const makeProfileEndpoint = _.memoize((userId) => makeAPIEndpoint(`Participants/${userId}/participantProfile`));
 
 export const saveProfileToState = (profile) => ({
   type: SAVE_PROFILE_TO_STATE,
