@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 
 import CouchPotatoAppBar from './components/CouchPotatoAppBar';
+import NotificationSnackbar from './components/NotificationSnackbar';
 import WithAuth from './components/WithAuth';
 
 import About from './views/About';
@@ -30,6 +31,7 @@ const App = () => (
       <Route path="/about" component={About} />
       <Route component={NotFound} />
     </Switch>
+    <NotificationSnackbar />
   </div>
 );
 
