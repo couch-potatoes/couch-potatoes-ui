@@ -9,6 +9,7 @@ export const INVALIDATE_USER_CREDENTIALS = 'INVALIDATE_USER_CREDENTIALS';
 export const SAVE_PROFILE_TO_STATE = 'SAVE_PROFILE_TO_STATE';
 
 const participantEndpoint = makeAPIEndpoint('Participants');
+const researcherEndpoint = makeAPIEndpoint('Researchers');
 
 export const saveUserCredentials = (token, userId) => ({
   type: SAVE_USER_CREDENTIALS,
@@ -18,11 +19,11 @@ export const saveUserCredentials = (token, userId) => ({
   },
 });
 
-export const login = (email, password) => {
+export const login = (email, password, isResearcher = false) => {
   return (dispatch) => {
     return axios({
       method: 'POST',
-      url: `${participantEndpoint}/login`,
+      url: `${isResearcher ? researcherEndpoint : participantEndpoint}/login`,
       data: {
         email,
         password
