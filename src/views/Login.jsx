@@ -8,6 +8,7 @@ import {
 } from 'material-ui';
 
 import { login } from '../actions/auth';
+import { addNotification } from '../actions/notifications';
 import { getProfile, saveProfileToState } from '../actions/profile';
 
 const validateState = ({ email, password }) => {
@@ -56,7 +57,7 @@ class Login extends Component {
     } = this.state;
 
     if (!validateState(this.state)) {
-      alert('Email and password required');
+      dispatch(addNotification('Email and password are required'));
       return;
     }
 
@@ -77,12 +78,12 @@ class Login extends Component {
             if (status === 404) {
               history.push('/profile');
             } else {
-              alert('Error logging in; try again');
+              dispatch(addNotification('Error logging in; try again'));
             }
           });
       })
         .catch(() => {
-          alert('Invalid Credentials');
+          dispatch(addNotification('Invalid Credentials'));
         });
   }
 
@@ -128,7 +129,7 @@ class Login extends Component {
             href="/register"
             primary
           />
-          <br/><br/>
+          <br/>
           <Link
             to="/pass-forgot"
             className="login-form-link"

@@ -6,9 +6,10 @@ import {
   RaisedButton,
 } from 'material-ui';
 
-import { registerParticipant } from '../actions/auth.js';
+import { registerParticipant } from '../actions/auth';
+import { addNotification } from '../actions/notifications';
 
-class Profile extends React.Component {
+class Registration extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -59,13 +60,15 @@ class Profile extends React.Component {
     } = this.state;
 
     if (password !== confirmPassword) {
+      dispatch(addNotification('Passwords do not match'));
       return;
     }
     dispatch(registerParticipant({email, password}))
       .then(() => {
         history.push('/profile');
+      }, () => {
+        dispatch(addNotification('Error creating account'));
       });
-
   }
 
   render() {
@@ -80,7 +83,6 @@ class Profile extends React.Component {
             type="email"
             floatingLabelText="Email"
             fullWidth={true}
-            required
             value={this.state.email}
           />
 
@@ -121,11 +123,10 @@ class Profile extends React.Component {
             onTouchTap={this.onCancel}
             type="cancel"
           />
-
         </Paper>
       </div>
     );
   }
 }
 
-export default connect()(Profile);
+export default connect()(Registration);
