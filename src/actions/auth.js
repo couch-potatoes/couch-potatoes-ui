@@ -11,11 +11,12 @@ export const SAVE_PROFILE_TO_STATE = 'SAVE_PROFILE_TO_STATE';
 const participantEndpoint = makeAPIEndpoint('Participants');
 const researcherEndpoint = makeAPIEndpoint('Researchers');
 
-export const saveUserCredentials = (token, userId) => ({
+export const saveUserCredentials = (token, userId, isResearcher) => ({
   type: SAVE_USER_CREDENTIALS,
   payload: {
     token,
     userId,
+    userType: isResearcher ? 'researcher' : 'participant',
   },
 });
 
@@ -30,7 +31,7 @@ export const login = (email, password, isResearcher = false) => {
       },
     }).then((res) => {
       const { id: token, userId } = res.data;
-      dispatch(saveUserCredentials(token, userId));
+      dispatch(saveUserCredentials(token, userId, isResearcher));
     });
   };
 };

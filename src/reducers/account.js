@@ -5,6 +5,7 @@ const initialState = {
   token: '',
   userId: '',
   profile: {},
+  userType: '',
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -20,6 +21,7 @@ export default (state = initialState, { type, payload }) => {
       isLoggedIn: true,
       token: payload.token,
       userId: payload.userId,
+      userType: payload.userType,
     };
   }
   case actions.SAVE_PROFILE_TO_STATE: {
