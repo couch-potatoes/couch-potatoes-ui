@@ -7,6 +7,7 @@ import {
 import CouchPotatoAppBar from './components/CouchPotatoAppBar';
 import WithAuth from './components/WithAuth';
 
+import About from './views/About';
 import Home from './views/Home';
 import Login from './views/Login';
 import Register from './views/Register';
@@ -26,6 +27,7 @@ const App = () => (
       <Route path="/profile" render={() => <WithAuth><Profile /></WithAuth>} />
       <Route path="/status" render={() => <WithAuth><StatusLog /></WithAuth>} />
       <Route path="/pass-res" render={() => <WithAuth><ResetPassword /></WithAuth>} />
+      <Route path="/about" component={About} />
       <Route component={NotFound} />
     </Switch>
   </div>
