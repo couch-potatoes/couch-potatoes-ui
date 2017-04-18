@@ -131,7 +131,7 @@ class Login extends Component {
           />
           <br/>
           <Link
-            to="/pass-forgot"
+            to="/reset-password"
             className="login-form-link"
           >
             Forgot Password?
