@@ -1,25 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { logout } from '../actions/auth';
 import { Paper } from 'material-ui';
 
 export class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.handleOnClick=this.handleOnClick.bind(this);
-  }
-
-  handleOnClick() {
-    const {
-      dispatch,
-      history,
-    } = this.props;
-    dispatch(logout());
-    history.push('/login');
-  }
   render() {
+    const { userType } = this.props;
+    if (userType === 'researcher') {
+      return (
+        <div>
+          Researcher view
+        </div>
+      );
+    }
     return (
       <div>
         <Link to="/status">
@@ -39,4 +33,19 @@ export class Home extends Component {
   }
 }
 
-export default withRouter(connect()(Home));
+Home.propTypes = {
+  userType: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  const {
+    account: {
+      userType,
+    },
+  } = state;
+  return {
+    userType,
+  };
+};
+
+export default withRouter(connect(mapStateToProps)(Home));

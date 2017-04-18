@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import {
+  Checkbox,
   Paper,
   RaisedButton,
   TextField,
@@ -21,9 +22,11 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      isResearcher: false,
     };
 
     this.handleOnChange = this.handleOnChange.bind(this);
+    this.onCheck = this.onCheck.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
@@ -43,6 +46,12 @@ class Login extends Component {
     });
   }
 
+  onCheck() {
+    this.setState({
+      isResearcher: !this.state.isResearcher,
+    });
+  }
+
   onSubmit(ev) {
     ev.preventDefault();
 
@@ -54,14 +63,14 @@ class Login extends Component {
     const {
       email,
       password,
+      isResearcher,
     } = this.state;
 
     if (!validateState(this.state)) {
       dispatch(addNotification('Email and password are required'));
       return;
     }
-
-    dispatch(login(email, password))
+    dispatch(login(email, password, isResearcher))
       .then(() => {
         dispatch(getProfile())
           .then(({ data: profile }) => {
@@ -90,7 +99,8 @@ class Login extends Component {
   render() {
     const {
       email,
-      password
+      password,
+      isResearcher,
     } = this.state;
 
     return (
@@ -114,6 +124,12 @@ class Login extends Component {
             spellCheck={false}
             type="password"
             value={password}
+          />
+          <br />
+          <Checkbox
+            checked={isResearcher}
+            label="I am a researcher"
+            onCheck={this.onCheck}
           />
           <RaisedButton
             disabled={!validateState(this.state)}
