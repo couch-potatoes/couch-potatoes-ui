@@ -16,6 +16,7 @@ import NotFound from './views/NotFound';
 import Profile from './views/Profile';
 import StatusLog from './views/StatusLog';
 import ResetPassword from './views/ResetPassword';
+import ForgotPassword from './views/ForgotPassword';
 
 const App = () => (
   <div>
@@ -23,11 +24,11 @@ const App = () => (
     <Switch>
       <Route exact path="/" render={() => <WithAuth><Home /></WithAuth>} />
       <Route path="/login" component={Login} />
-      <Route path="/reset-password" component={ResetPassword} />
+      <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/register" component={Register} />
       <Route path="/profile" render={() => <WithAuth><Profile /></WithAuth>} />
       <Route path="/status" render={() => <WithAuth><StatusLog /></WithAuth>} />
-      <Route path="/pass-res" render={() => <WithAuth><ResetPassword /></WithAuth>} />
+      <Route path="/reset-password" render={() => <WithAuth><ResetPassword /></WithAuth>} />
       <Route path="/about" component={About} />
       <Route component={NotFound} />
     </Switch>
