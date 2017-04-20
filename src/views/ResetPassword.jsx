@@ -76,6 +76,7 @@ class ResetPassword extends React.Component {
 
           <TextField
             fullWidth
+            floatingLabelText="New Password"
             name="newPassword"
             onChange={this.handleOnChange}
             spellCheck={false}

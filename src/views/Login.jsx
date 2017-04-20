@@ -139,15 +139,18 @@ class Login extends Component {
             primary
             type="submit"
           />
-          <RaisedButton
-            className="inline-button"
-            label="Register"
-            href="/register"
-            primary
-          />
+          <Link
+            to='/register'
+          >
+            <RaisedButton
+              className="inline-button"
+              label="Register"
+              primary
+            />
+          </Link>
           <br/>
           <Link
-            to="/pass-forgot"
+            to="/forgot-password"
             className="login-form-link"
           >
             Forgot Password?
