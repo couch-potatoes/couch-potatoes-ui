@@ -72,24 +72,28 @@ class Login extends Component {
     }
     dispatch(login(email, password, isResearcher))
       .then(() => {
-        dispatch(getProfile())
-          .then(({ data: profile }) => {
-            dispatch(saveProfileToState(profile));
-            history.push('/');
-          })
-          .catch((error) => {
-            const {
-              response: {
-                status,
-              },
-            } = error;
-            // Profile not found; make user create one
-            if (status === 404) {
-              history.push('/profile');
-            } else {
-              dispatch(addNotification('Error logging in; try again'));
-            }
-          });
+        if (!isResearcher) {
+          dispatch(getProfile())
+            .then(({ data: profile }) => {
+              dispatch(saveProfileToState(profile));
+              history.push('/');
+            })
+            .catch((error) => {
+              const {
+                response: {
+                  status,
+                },
+              } = error;
+              // Profile not found; make user create one
+              if (status === 404) {
+                history.push('/profile');
+              } else {
+                dispatch(addNotification('Error logging in; try again'));
+              }
+            });
+          return;
+        }
+        history.push('/');
       })
         .catch(() => {
           dispatch(addNotification('Invalid Credentials'));

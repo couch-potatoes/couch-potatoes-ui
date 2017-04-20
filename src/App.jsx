@@ -27,6 +27,7 @@ const App = () => (
       <Route path="/register" component={Register} />
       <Route path="/profile" render={() => <WithAuth><Profile /></WithAuth>} />
       <Route path="/status" render={() => <WithAuth><StatusLog /></WithAuth>} />
+      <Route path="/stat" component={StatusLog} />
       <Route path="/pass-res" render={() => <WithAuth><ResetPassword /></WithAuth>} />
       <Route path="/about" component={About} />
       <Route component={NotFound} />
