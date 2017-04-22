@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   DatePicker,
   FlatButton,
@@ -164,4 +165,4 @@ class StatusLog extends Component {
   }
 }
 
-export default StatusLog;
+export default connect()(StatusLog);

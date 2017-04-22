@@ -11,6 +11,7 @@ import {
 import { login } from '../actions/auth';
 import { addNotification } from '../actions/notifications';
 import { getProfile, saveProfileToState } from '../actions/profile';
+import { getStatusEntries } from '../actions/statusEntry';
 
 const validateState = ({ email, password }) => {
   return !!(email && password);
@@ -76,7 +77,8 @@ class Login extends Component {
           dispatch(getProfile())
             .then(({ data: profile }) => {
               dispatch(saveProfileToState(profile));
-              history.push('/');
+              dispatch(getStatusEntries())
+                .then(() => { history.push('/'); });
             })
             .catch((error) => {
               const {
