@@ -16,6 +16,8 @@ const statusEntry = PropTypes.shape({
   stressLevel: PropTypes.number.isRequired,
 });
 
+const statusLog = PropTypes.objectOf(statusEntry);
+
 const profile = PropTypes.shape({
   age: PropTypes.number,
   gender: PropTypes.string,
@@ -27,4 +29,5 @@ const profile = PropTypes.shape({
 export default {
   profile,
   statusEntry,
+  statusLog,
 };
