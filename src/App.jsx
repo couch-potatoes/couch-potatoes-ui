@@ -15,6 +15,7 @@ import Register from './views/Register';
 import NotFound from './views/NotFound';
 import Profile from './views/Profile';
 import StatusLog from './views/StatusLog';
+import Test from './views/ResearchHome.jsx';
 import ResetPassword from './views/ResetPassword';
 import ForgotPassword from './views/ForgotPassword';
 
@@ -24,6 +25,7 @@ const App = () => (
     <Switch>
       <Route exact path="/" render={() => <WithAuth><Home /></WithAuth>} />
       <Route path="/login" component={Login} />
+      <Route path="/test" component={Test} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/register" component={Register} />
       <Route path="/profile" render={() => <WithAuth><Profile /></WithAuth>} />
