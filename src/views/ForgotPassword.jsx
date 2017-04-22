@@ -4,7 +4,7 @@ import { Paper, TextField, RaisedButton } from 'material-ui';
 
 class ForgotPassword extends React.Component {
   constructor(props) {
-	super(props);
+    super(props);
     this.state = {
       email: '',
       confEmail: '',
@@ -59,11 +59,7 @@ class ForgotPassword extends React.Component {
       return;
     }
 
-    console.log(
-      email
-    );
-
-    alert("Password Reset Requested!");
+    alert('Password Reset Requested!');
 
     history.push('login');
   }
@@ -83,7 +79,7 @@ class ForgotPassword extends React.Component {
             type="email"
             value={this.state.email}
           />
-          
+
           <TextField
             fullWidth
             floatingLabelText="Confirm Email"

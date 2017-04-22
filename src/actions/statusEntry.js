@@ -12,7 +12,7 @@ export const CACHE_STATUS_ENTRIES = 'CACHE_STATUS_ENTRIES';
 export const cacheStatusEntry = (date, statusEntry) => ({
   type: CACHE_STATUS_ENTRY,
   payload: {
-    date: date.toDateString(),
+    date,
     statusEntry,
   },
 });
@@ -36,7 +36,7 @@ export const getStatusEntries = () => (dispatch, getState) => {
     .then(({ data: entries }) => {
       const dateEntries = entries.map((entry) => [
         new Date(entry.date).toDateString(),
-        translate.frontToBack(entry),
+        translate.backToFront(entry),
       ]);
       dispatch(cacheStatusEntries(_.fromPairs(dateEntries)));
     });
@@ -61,14 +61,21 @@ export const getStatusEntry = (date) => (dispatch, getState) => {
 
 export const createStatusEntry = (date, statusEntry) => (dispatch, getState) => {
   const { token, userId } = getState().account;
+  const entry = {
+    ...translate.frontToBack(statusEntry),
+    date,
+  };
   return axios({
     method: 'POST',
     headers: {
       Authorization: token,
     },
     url: makeStatusEntryEndpoint(userId),
-    data: statusEntry,
-  });
+    data: entry,
+  })
+    .then(() => {
+      dispatch(cacheStatusEntry(date, statusEntry));
+    });
 };
 
 export const updateStatusEntry = (date, statusEntry) => (dispatch, getState) => {
@@ -79,6 +86,6 @@ export const updateStatusEntry = (date, statusEntry) => (dispatch, getState) => 
       Authorization: token,
     },
     url: `${makeStatusEntryEndpoint(userId)}/${date}`,
-    data: statusEntry,
+    data: translate.frontToBack(statusEntry),
   });
 };

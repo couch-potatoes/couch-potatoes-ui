@@ -5,34 +5,43 @@ import {
   FlatButton,
 } from 'material-ui';
 
+import { addNotification } from '../actions/notifications';
+import {
+  createStatusEntry,
+  updateStatusEntry,
+} from '../actions/statusEntry';
 import StatusCard from '../components/StatusCard';
 import dates from '../util/dates';
+import CustomPropTypes from '../util/custom-prop-types';
+
+const defaultStatusEntry = () => ({
+  ateBeforeExercise: false,
+  ateAfterExercise: false,
+  calories: 0,
+  carbs: 0,
+  didEatBreakfast: false,
+  energyLevel: 0,
+  fats: 0,
+  hoursOfExercise: 0,
+  hoursOfSleep: 0,
+  numOfMeals: 0,
+  proteins: 0,
+  sleepQuality: 0,
+  stressLevel: 0,
+});
 
 class StatusLog extends Component {
   constructor (props) {
     super(props);
     this.state = {
       currentDate: dates.currentDate,
-      statusEntry: {
-        ateBeforeExercise: false,
-        ateAfterExercise: false,
-        calories: 0,
-        carbs: 0,
-        didEatBreakfast: false,
-        energyLevel: 0,
-        fats: 0,
-        hoursOfExercise: 0,
-        hoursOfSleep: 0,
-        numOfMeals: 0,
-        proteins: 0,
-        sleepQuality: 0,
-        stressLevel: 0,
-      },
+      statusEntry: defaultStatusEntry(),
+      isNewEntry: true,
       isOpened: {
         nutrition: true,
         wellness: true,
         fitness: true,
-      }
+      },
     };
     this.handleDateChange = this.handleDateChange.bind(this);
     this.makeSliderChangeHandler = this.makeSliderChangeHandler.bind(this);
@@ -40,6 +49,51 @@ class StatusLog extends Component {
     this.handleCardExpandedChange = this.handleCardExpandedChange.bind(this);
     this.expandAll = this.expandAll.bind(this);
     this.collapseAll = this.collapseAll.bind(this);
+    this.loadStatusEntry = this.loadStatusEntry.bind(this);
+    this.saveEntry = this.saveEntry.bind(this);
+  }
+
+  componentDidMount() {
+    const { currentDate } = this.state;
+    this.loadStatusEntry(currentDate.toDateString());
+  }
+
+  saveEntry() {
+    const { dispatch } = this.props;
+    const {
+      currentDate,
+      isNewEntry,
+      statusEntry,
+    } = this.state;
+
+    const action = isNewEntry ? createStatusEntry : updateStatusEntry;
+    const date = new Date(currentDate);
+    date.setDate(currentDate.getDate() + 1);
+    dispatch(action(date.toDateString(), statusEntry))
+      .then(() => {
+        dispatch(addNotification('Saved!'));
+        this.setState({
+          isNewEntry: false,
+        });
+      }, () => {
+        dispatch(addNotification('Error saving entry; please try again'));
+      });
+  }
+
+  loadStatusEntry(date) {
+    const dateToFetch = typeof date === 'string' ? date : date.toDateString();
+    const { statusLog } = this.props;
+    if (statusLog[dateToFetch]) {
+      this.setState({
+        statusEntry: statusLog[dateToFetch],
+        isNewEntry: false,
+      });
+    } else {
+      this.setState({
+        statusEntry: defaultStatusEntry(),
+        isNewEntry: true,
+      });
+    }
   }
 
   handleCardExpandedChange(section) {
@@ -89,6 +143,7 @@ class StatusLog extends Component {
       currentDate: date,
     });
     // Load the user's status entry for the new date
+    this.loadStatusEntry(date.toDateString());
   }
 
   handleInputChange(event) {
@@ -152,6 +207,11 @@ class StatusLog extends Component {
           label="Collapse All"
           onTouchTap={this.collapseAll}
         />
+        <FlatButton
+          primary
+          label="Save"
+          onTouchTap={this.saveEntry}
+        />
         <StatusCard
           disabled={false}
           isOpened={isOpened}
@@ -165,4 +225,19 @@ class StatusLog extends Component {
   }
 }
 
-export default connect()(StatusLog);
+StatusLog.propTypes = {
+  statusLog: CustomPropTypes.statusLog,
+};
+
+const mapStateToProps = (state) => {
+  const {
+    account: {
+      statusEntryCache: statusLog,
+    },
+  } = state;
+  return {
+    statusLog,
+  };
+};
+
+export default connect(mapStateToProps)(StatusLog);

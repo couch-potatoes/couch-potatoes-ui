@@ -1,4 +1,4 @@
-export const frontToBack = (statusEntry) => {
+export const backToFront = (statusEntry) => {
   const {
     breakfast: didEatBreakfast,
     calories,
@@ -31,7 +31,7 @@ export const frontToBack = (statusEntry) => {
   };
 };
 
-export const backToFront = (statusEntry) => {
+export const frontToBack = (statusEntry) => {
   const {
     ateAfterExercise: eatBefore,
     ateBeforeExercise: eatAfter,
@@ -65,6 +65,6 @@ export const backToFront = (statusEntry) => {
 };
 
 export default {
+  backToFront,
   frontToBack,
-
 };
