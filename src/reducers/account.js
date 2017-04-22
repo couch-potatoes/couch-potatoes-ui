@@ -6,6 +6,7 @@ const initialState = {
   userId: '',
   profile: {},
   userType: '',
+  statusEntryCache: {},
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -28,6 +29,15 @@ export default (state = initialState, { type, payload }) => {
     return {
       ...state,
       profile: payload.profile,
+    };
+  }
+  case actions.CACHE_STATUS_ENTRY: {
+    return {
+      ...state,
+      statusEntryCache: {
+        ...state.statusEntryCache,
+        [payload.date]: payload.statusEntry,
+      },
     };
   }
   default: {

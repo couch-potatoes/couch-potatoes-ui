@@ -87,6 +87,7 @@ class StatusLog extends Component {
     this.setState({
       currentDate: date,
     });
+    // Load the user's status entry for the new date
   }
 
   handleInputChange(event) {

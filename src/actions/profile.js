@@ -4,8 +4,17 @@ import _ from 'lodash';
 import { makeAPIEndpoint } from '../util/api';
 
 export const SAVE_PROFILE_TO_STATE = 'SAVE_PROFILE_TO_STATE';
+export const CACHE_STATUS_ENTRY = 'CACHE_STATUS_ENTRY';
 
 const makeProfileEndpoint = _.memoize((userId) => makeAPIEndpoint(`Participants/${userId}/participantProfile`));
+
+export const cacheStatusEntry = (date, statusEntry) => ({
+  type: CACHE_STATUS_ENTRY,
+  payload: {
+    date: date.toDateString(),
+    statusEntry,
+  },
+});
 
 export const saveProfileToState = (profile) => ({
   type: SAVE_PROFILE_TO_STATE,
@@ -55,4 +64,16 @@ export const createProfile = (profile) => {
       data: profile
     });
   };
+};
+
+export const getStatusEntry = (date) => (dispatch, getState) => {
+  const { token, userId } = getState().account;
+
+  return axios({
+    method: 'GET',
+    headers: {
+      Authorization: token,
+    },
+    url: makeAPIEndpoint(`Participants/${userId}/statusEntries/${date}`),
+  });
 };
