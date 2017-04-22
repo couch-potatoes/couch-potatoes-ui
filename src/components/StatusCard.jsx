@@ -7,26 +7,33 @@ import {
   TextField,
 } from 'material-ui';
 
+import Slider from './Slider';
 import CustomPropTypes from '../util/custom-prop-types';
 
 const StatusCard = (props) => {
   const {
     disabled,
     statusEntry: {
+      ateAfterExercise,
+      ateBeforeExercise,
       calories,
       carbs,
       didEatBreakfast,
       energyLevel,
       fats,
       hoursOfExercise,
+      hoursOfSleep,
       numOfMeals,
       proteins,
+      sleepQuality,
+      stressLevel,
     },
     isOpened: {
       nutrition,
       wellness,
       fitness
     },
+    handleSliderChange,
     handleInputChange,
     handleCardExpandedChange,
   } = props;
@@ -78,6 +85,15 @@ const StatusCard = (props) => {
             onChange={handleInputChange}
             value={proteins}
           />
+          <TextField
+            disabled={disabled}
+            fullWidth
+            name="numOfMeals"
+            type="number"
+            floatingLabelText="Number of meals you ate"
+            onChange={handleInputChange}
+            value={numOfMeals}
+          />
           <Checkbox
             checked={didEatBreakfast}
             onCheck={handleInputChange}
@@ -100,20 +116,29 @@ const StatusCard = (props) => {
           <TextField
             disabled={disabled}
             fullWidth
-            name="numOfMeals"
+            name="hoursOfSleep"
             type="number"
-            floatingLabelText="Number of meals you ate"
+            floatingLabelText="How many hours did you sleep last night?"
             onChange={handleInputChange}
-            value={numOfMeals}
+            value={hoursOfSleep}
           />
-          <TextField
-            disabled={disabled}
-            fullWidth
+          <Slider
+            name="sleepQuality"
+            label="Sleep Quality"
+            value={sleepQuality}
+            onChange={handleSliderChange('sleepQuality')}
+          />
+          <Slider
+            name="stressLevel"
+            label="Stress Level"
+            value={stressLevel}
+            onChange={handleSliderChange('stressLevel')}
+          />
+          <Slider
             name="energyLevel"
-            type="number"
-            floatingLabelText="Energy Level"
-            onChange={handleInputChange}
+            label="Energy Level"
             value={energyLevel}
+            onChange={handleSliderChange('energyLevel')}
           />
         </CardText>
       </Card>
@@ -137,6 +162,18 @@ const StatusCard = (props) => {
             onChange={handleInputChange}
             value={hoursOfExercise}
           />
+          <Checkbox
+            checked={ateBeforeExercise}
+            onCheck={handleInputChange}
+            name="ateBeforeExercise"
+            label="Did you eat within an hour before you exercised?"
+          />
+          <Checkbox
+            checked={ateAfterExercise}
+            onCheck={handleInputChange}
+            name="ateAfterExercise"
+            label="Did you eat within an hour after you exercised?"
+          />
         </CardText>
       </Card>
     </div>
@@ -152,6 +189,7 @@ StatusCard.propTypes = {
   }).isRequired,
   handleInputChange: PropTypes.func.isRequired,
   handleCardExpandedChange: PropTypes.func.isRequired,
+  handleSliderChange: PropTypes.func.isRequired,
   statusEntry: CustomPropTypes.statusEntry.isRequired,
 };
 

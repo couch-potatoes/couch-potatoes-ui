@@ -13,6 +13,8 @@ class StatusLog extends Component {
     this.state = {
       currentDate: dates.currentDate,
       statusEntry: {
+        ateBeforeExercise: false,
+        ateAfterExercise: false,
         calories: 0,
         carbs: 0,
         didEatBreakfast: false,
@@ -31,6 +33,8 @@ class StatusLog extends Component {
         fitness: true,
       }
     };
+    this.handleDateChange = this.handleDateChange.bind(this);
+    this.makeSliderChangeHandler = this.makeSliderChangeHandler.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleCardExpandedChange = this.handleCardExpandedChange.bind(this);
     this.expandAll = this.expandAll.bind(this);
@@ -39,8 +43,6 @@ class StatusLog extends Component {
 
   handleCardExpandedChange(section) {
     return (newState) => {
-      console.log('section', section);
-      console.log('newState', newState);
       this.setState({
         isOpened: {
           ...this.state.isOpened,
@@ -67,6 +69,23 @@ class StatusLog extends Component {
         wellness: false,
         fitness: false,
       },
+    });
+  }
+
+  makeSliderChangeHandler(name) {
+    return (_, newValue) => {
+      this.setState({
+        statusEntry: {
+          ...this.state.statusEntry,
+          [name]: newValue
+        },
+      });
+    };
+  }
+
+  handleDateChange(_, date) {
+    this.setState({
+      currentDate: date,
     });
   }
 
@@ -114,12 +133,14 @@ class StatusLog extends Component {
       <div>
         <h1>Status Log</h1>
         <DatePicker
+          name="datePicker"
           container="inline"
           mode="landscape"
           locale="en-US"
           value={currentDate}
           minDate={dates.minDate}
-          maxDate={dates.maxDate}
+          maxDate={dates.currentDate}
+          onChange={this.handleDateChange}
         />
         <FlatButton
           label="Expand All"
@@ -134,6 +155,7 @@ class StatusLog extends Component {
           isOpened={isOpened}
           statusEntry={statusEntry}
           handleInputChange={this.handleInputChange}
+          handleSliderChange={this.makeSliderChangeHandler}
           handleCardExpandedChange={this.handleCardExpandedChange}
         />
       </div>
