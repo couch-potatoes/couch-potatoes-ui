@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Paper } from 'material-ui';
+import { Paper, RaisedButton } from 'material-ui';
 
 export class Home extends Component {
   render() {
@@ -10,7 +10,13 @@ export class Home extends Component {
     if (userType === 'researcher') {
       return (
         <div>
-          Researcher view
+          <Link to='/charts'>
+            <RaisedButton
+              className='inline-button'
+              label='View Charts'
+              primary
+            />
+          </Link>
         </div>
       );
     }

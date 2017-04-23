@@ -25,7 +25,7 @@ const App = () => (
     <Switch>
       <Route exact path="/" render={() => <WithAuth><Home /></WithAuth>} />
       <Route path="/login" component={Login} />
-      <Route path="/charts" component={ResearcherCharts} />
+      <Route path="/charts" render={() => <WithAuth><ResearcherCharts /></WithAuth>} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/register" component={Register} />
       <Route path="/profile" render={() => <WithAuth><Profile /></WithAuth>} />
