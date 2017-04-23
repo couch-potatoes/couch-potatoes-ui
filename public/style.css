@@ -25,6 +25,14 @@
     margin: 0 auto;
 }
 
+#researcher-charts {
+    margin: 0;
+}
+
+#researcher-charts .option-buttons{
+    text-align: center;
+}
+
 .page-title {
     font-size: 2em;
     padding: 1em;
