@@ -56,3 +56,15 @@ export const createProfile = (profile) => {
     });
   };
 };
+
+export const getStatusEntry = (date) => (dispatch, getState) => {
+  const { token, userId } = getState().account;
+
+  return axios({
+    method: 'GET',
+    headers: {
+      Authorization: token,
+    },
+    url: makeAPIEndpoint(`Participants/${userId}/statusEntries/${date}`),
+  });
+};

@@ -1,4 +1,8 @@
 import * as actions from '../actions/auth';
+import {
+  CACHE_STATUS_ENTRY,
+  CACHE_STATUS_ENTRIES,
+} from '../actions/statusEntry';
 
 const initialState = {
   isLoggedIn: false,
@@ -6,6 +10,7 @@ const initialState = {
   userId: '',
   profile: {},
   userType: '',
+  statusEntryCache: {},
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -28,6 +33,21 @@ export default (state = initialState, { type, payload }) => {
     return {
       ...state,
       profile: payload.profile,
+    };
+  }
+  case CACHE_STATUS_ENTRY: {
+    return {
+      ...state,
+      statusEntryCache: {
+        ...state.statusEntryCache,
+        [payload.date]: payload.statusEntry,
+      },
+    };
+  }
+  case CACHE_STATUS_ENTRIES: {
+    return {
+      ...state,
+      statusEntryCache: payload.statusEntries
     };
   }
   default: {
