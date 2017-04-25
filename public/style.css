@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 #root {
     font-family: sans-serif;
 }
@@ -68,4 +73,21 @@
 
 .inline-button {
     margin: 1em !important;
+}
+
+.inline-input {
+    margin: 1em !important;
+    display: inline-block;
+}
+
+.option-buttons {
+    padding: 1em;
+    margin-top: 1em;
+    border-top: 1px solid lightgrey;
+}
+
+.option-inputs {
+    display: table;
+    margin: 0 auto;
+    padding: 5px;
 }

@@ -26,7 +26,7 @@ const App = () => (
     <Switch>
       <Route exact path="/" render={() => <WithAuth><Home /></WithAuth>} />
       <Route path="/login" component={Login} />
-      <Route path="/n-charts" render={() => <WithAuth><NutritionCharts /></WithAuth>} />
+      <Route path="/n-charts" component={NutritionCharts} />
       <Route path="/se-charts" render={() => <WithAuth><SECharts /></WithAuth>} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/register" component={Register} />

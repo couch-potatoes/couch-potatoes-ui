@@ -1,5 +1,6 @@
 export default {
   male: [
+    {'value': 'na', 'primaryText': 'No Sport Chosen'},
     {'value': 'baseball', 'primaryText': 'Baseball'},
     {'value': 'basketball', 'primaryText': 'Basketball'},
     {'value': 'cross_country', 'primaryText': 'Cross Country'},
@@ -21,6 +22,7 @@ export default {
     {'value': 'wrestling', 'primaryText': 'Wrestling'},
   ],
   female: [
+    {'value': 'na', 'primaryText': 'No Sport Chosen'},
     {'value': 'basketball', 'primaryText': 'Basketball'},
     {'value': 'cross_country', 'primaryText': 'Cross Country'},
     {'value': 'cycling', 'primaryText': 'Cycling'},
