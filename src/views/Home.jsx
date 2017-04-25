@@ -10,10 +10,17 @@ export class Home extends Component {
     if (userType === 'researcher') {
       return (
         <div>
-          <Link to='/charts'>
+          <Link to='/n-charts'>
             <RaisedButton
               className='inline-button'
-              label='View Charts'
+              label='View Nutrition Charts'
+              primary
+            />
+          </Link>
+          <Link to='/se-charts'>
+            <RaisedButton
+              className='inline-button'
+              label='View Sleep and Energy Charts'
               primary
             />
           </Link>

@@ -15,7 +15,8 @@ import Register from './views/Register';
 import NotFound from './views/NotFound';
 import Profile from './views/Profile';
 import StatusLog from './views/StatusLog';
-import ResearcherCharts from './views/ResearcherCharts.jsx';
+import NutritionCharts from './views/NutritionCharts.jsx';
+import SECharts from './views/SECharts.jsx';
 import ResetPassword from './views/ResetPassword';
 import ForgotPassword from './views/ForgotPassword';
 
@@ -25,7 +26,8 @@ const App = () => (
     <Switch>
       <Route exact path="/" render={() => <WithAuth><Home /></WithAuth>} />
       <Route path="/login" component={Login} />
-      <Route path="/charts" render={() => <WithAuth><ResearcherCharts /></WithAuth>} />
+      <Route path="/n-charts" render={() => <WithAuth><NutritionCharts /></WithAuth>} />
+      <Route path="/se-charts" render={() => <WithAuth><SECharts /></WithAuth>} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/register" component={Register} />
       <Route path="/profile" render={() => <WithAuth><Profile /></WithAuth>} />

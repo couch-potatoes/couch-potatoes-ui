@@ -11,7 +11,7 @@ fetch('https://potatoes-db.herokuapp.com/db.php', {
     'Accept': 'application/json',
     'Content-Type': 'application/x-www-form-urlencoded',
   },
-  body: 'chart=daily-average',
+  body: 'chart=nutrition',
 }).then(response => {
   return response.json();
 }).then(
@@ -26,7 +26,7 @@ fetch('https://potatoes-db.herokuapp.com/db.php', {
     });
   }
 );
-export class ResearcherCharts extends Component {
+export class NutritionCharts extends Component {
   
   constructor(props) {
     super(props);
@@ -56,14 +56,14 @@ export class ResearcherCharts extends Component {
             <RaisedButton
               className='inline-button'
               label='View data as a table'
-              href='https://potatoes-db.herokuapp.com/db.php?chart=daily-average&type=html'
+              href='https://potatoes-db.herokuapp.com/db.php?chart=nutrition&type=html'
               target='_blank'
               primary
             />
             <RaisedButton
               className='inline-button'
               label='Download data as CSV'
-              href='https://potatoes-db.herokuapp.com/db.php?chart=daily-average&type=csv'
+              href='https://potatoes-db.herokuapp.com/db.php?chart=nutrition&type=csv'
               target='_blank'
               primary
             />
@@ -99,7 +99,7 @@ export class ResearcherCharts extends Component {
   }
 }
 
-ResearcherCharts.propTypes = {
+NutritionCharts.propTypes = {
   userType: PropTypes.string.isRequired,
 };
 
@@ -114,4 +114,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(ResearcherCharts));
+export default withRouter(connect(mapStateToProps)(NutritionCharts));
