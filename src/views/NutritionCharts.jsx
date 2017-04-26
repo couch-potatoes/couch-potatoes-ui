@@ -11,10 +11,9 @@ import {
 
 import SPORTS from '../util/constants/sports';
 
-const db_data = [];
-
+var db_data = [];
 const connectDB = (request) => {
-
+  var dataStatus;
   fetch('http://localhost/db/db.php', { //'https://potatoes-db.herokuapp.com/db.php', {
     method: 'POST',
     headers: {
@@ -23,9 +22,15 @@ const connectDB = (request) => {
     },
     body: request,
   }).then(response => {
+    dataStatus = response.status;
+    console.log(dataStatus);
+    if(dataStatus !== 200){
+      alert('No Data Available for Current Request');
+    }
     return response.json();
   }).then(
     return_data => {
+      db_data = [];
       var count = 0;
       var objArray = Object.keys(return_data).map((row) => return_data[row]);
       db_data[count] = ['Date', 'Calories', 'Carbs (g)', 'Fat (g)', 'Protein (g)'];
@@ -39,7 +44,7 @@ const connectDB = (request) => {
 };
 
   //get data from database for initial chart rendering
-connectDB('chart=nutrition');
+connectDB('chart=nutrition&startDate='+new Date()+'&endDate='+ new Date()+'&gender=na&sport=na');
 
 const getSports = (gender) => {
   if (gender) {
@@ -58,7 +63,6 @@ const genderNotChosen = () => {
 };
 
 export class NutritionCharts extends Component {
-  
   constructor(props) {
     super(props);
 
@@ -82,25 +86,35 @@ export class NutritionCharts extends Component {
       gender: 'na',
       sport: 'na',
       sportItems: genderNotChosen(),
+      renderButton: {
+        disabled: false,
+        label: 'Render Charts',
+      },
+      downloadButton:{
+        disabled: true,
+      }
     };
 
     this.changeStartDate = this.changeStartDate.bind(this);
     this.changeEndDate = this.changeEndDate.bind(this);
     this.selectGender = this.selectGender.bind(this);
     this.selectSport = this.selectSport.bind(this);
-    this.RequestCharts = this.RequestCharts.bind(this);
+    this.requestData = this.requestData.bind(this);
+    this.reloadData = this.reloadData.bind(this);
   }
   
   changeStartDate (_, e){
     this.setState({
       startDate: e,
     });
+    this.requestData();
   }
 
   changeEndDate (_, e){
     this.setState({
       endDate: e
     });
+    this.requestData();
   }
 
   selectGender (event, index, value) {
@@ -116,26 +130,28 @@ export class NutritionCharts extends Component {
       sport: 'na',
       sportItems: genderNotChosen(),
     });
+    this.requestData();
   }
 
   selectSport (event, index, value) {
     this.setState({
       sport: value
     });
+    this.requestData();
   }
 
-  RequestCharts (){
-    console.log(this.state.startDate);
-    console.log(this.state.endDate);
-    console.log(this.state.gender);
-    console.log(this.state.sport);
+  requestData (){
     connectDB(
       'chart=nutrition&startDate=' + this.state.startDate
       + '&endDate=' + this.state.endDate
       + '&gender=' + this.state.gender
       + '&sport=' + this.state.sport
     );
+  }
+
+  reloadData() {
     this.setState({ChartData: db_data});
+    this.setState({downloadButton: {disabled: false}});
   }
 
   render() {
@@ -192,8 +208,9 @@ export class NutritionCharts extends Component {
           </div>
           <div className="option-inputs">
             <RaisedButton
-              label="Load Data"
-              onTouchTap={this.RequestCharts}
+              label={this.state.renderButton.label}
+              onTouchTap={this.reloadData}
+              disabled={this.state.renderButton.disabled}
               primary
             />
           </div>
@@ -203,6 +220,7 @@ export class NutritionCharts extends Component {
               label="View data as a table"
               href="https://potatoes-db.herokuapp.com/db.php?chart=nutrition&type=html"
               target="_blank"
+              disabled={this.state.downloadButton.disabled}
               primary
             />
             <RaisedButton
@@ -210,27 +228,30 @@ export class NutritionCharts extends Component {
               label="Download data as CSV"
               href="https://potatoes-db.herokuapp.com/db.php?chart=nutrition&type=csv"
               target="_blank"
+              disabled={this.state.downloadButton.disabled}
               primary
             />
           </div>
-          <Chart
-            chartType="BarChart"
-            data={this.state.ChartData}
-            options={this.state.barChartOptions}
-            graph_id="BarChart"
-            width="100%"
-            height="600px"
-            legend_toggle
-          />
-          <Chart
-            chartType="LineChart"
-            data={this.state.ChartData}
-            options={this.state.lineChartOptions}
-            graph_id="LineChart"
-            width="100%"
-            height="600px"
-            legend_toggle
-          />
+          <div id="charts">
+            <Chart
+              chartType="BarChart"
+              data={this.state.ChartData}
+              options={this.state.barChartOptions}
+              graph_id="BarChart"
+              width="100%"
+              height="600px"
+              legend_toggle
+            />
+            <Chart
+              chartType="LineChart"
+              data={this.state.ChartData}
+              options={this.state.lineChartOptions}
+              graph_id="LineChart"
+              width="100%"
+              height="600px"
+              legend_toggle
+            />
+          </div>
         </div>
       );
     }
