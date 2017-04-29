@@ -6,6 +6,7 @@ import {
 
 const ChartTypeSelector = ({ onChange, value }) => (
   <SelectField
+    fullWidth
     floatingLabelText="Chart Type"
     id="chart-type"
     onChange={onChange}
