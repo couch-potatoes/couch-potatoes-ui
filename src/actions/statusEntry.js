@@ -2,7 +2,6 @@ import axios from 'axios';
 import _ from 'lodash';
 
 import { makeAPIEndpoint } from '../util/api';
-import translate from '../util/translate';
 
 const makeStatusEntryEndpoint = _.memoize((userId) => makeAPIEndpoint(`Participants/${userId}/statusEntries`));
 
@@ -36,7 +35,7 @@ export const getStatusEntries = () => (dispatch, getState) => {
     .then(({ data: entries }) => {
       const dateEntries = entries.map((entry) => [
         new Date(entry.date).toDateString(),
-        translate.backToFront(entry),
+        entry,
       ]);
       dispatch(cacheStatusEntries(_.fromPairs(dateEntries)));
     });
@@ -55,14 +54,14 @@ export const getStatusEntry = (date) => (dispatch, getState) => {
     url: `${makeStatusEntryEndpoint(userId)}/${date}`,
   })
     .then((res) => {
-      dispatch(cacheStatusEntry(translate.frontToBack(res.data)));
+      dispatch(cacheStatusEntry(res.data));
     });
 };
 
 export const createStatusEntry = (date, statusEntry) => (dispatch, getState) => {
   const { token, userId } = getState().account;
   const entry = {
-    ...translate.frontToBack(statusEntry),
+    ...statusEntry,
     date,
   };
   return axios({
@@ -86,6 +85,6 @@ export const updateStatusEntry = (date, statusEntry) => (dispatch, getState) => 
       Authorization: token,
     },
     url: `${makeStatusEntryEndpoint(userId)}/${date}`,
-    data: translate.frontToBack(statusEntry),
+    data: statusEntry,
   });
 };

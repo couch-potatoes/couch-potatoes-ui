@@ -14,28 +14,28 @@ const StatusCard = (props) => {
   const {
     disabled,
     statusEntry: {
-      ateAfterExercise,
-      ateBeforeExercise,
+      breakfast,
       calories,
       carbs,
-      didEatBreakfast,
+      eatAfter,
+      eatBefore,
       energyLevel,
+      exerciseLength,
       fats,
-      hoursOfExercise,
-      hoursOfSleep,
-      numOfMeals,
+      numMeals,
       proteins,
+      sleepLength,
       sleepQuality,
       stressLevel,
     },
+    handleCardExpandedChange,
+    handleInputChange,
+    handleSliderChange,
     isOpened: {
       nutrition,
       wellness,
       fitness
     },
-    handleSliderChange,
-    handleInputChange,
-    handleCardExpandedChange,
   } = props;
   return (
     <div>
@@ -88,16 +88,16 @@ const StatusCard = (props) => {
           <TextField
             disabled={disabled}
             fullWidth
-            name="numOfMeals"
+            name="numMeals"
             type="number"
             floatingLabelText="Number of meals you ate"
             onChange={handleInputChange}
-            value={numOfMeals}
+            value={numMeals}
           />
           <Checkbox
-            checked={didEatBreakfast}
+            checked={breakfast}
             onCheck={handleInputChange}
-            name="didEatBreakfast"
+            name="breakfast"
             label="I ate breakfast today"
           />
         </CardText>
@@ -116,11 +116,11 @@ const StatusCard = (props) => {
           <TextField
             disabled={disabled}
             fullWidth
-            name="hoursOfSleep"
+            name="sleepLength"
             type="number"
             floatingLabelText="How many hours did you sleep last night?"
             onChange={handleInputChange}
-            value={hoursOfSleep}
+            value={sleepLength}
           />
           <Slider
             name="sleepQuality"
@@ -156,22 +156,22 @@ const StatusCard = (props) => {
           <TextField
             disabled={disabled}
             fullWidth
-            name="hoursOfExercise"
+            name="exerciseLength"
             type="number"
             floatingLabelText="Number of hours you exercised (rounded up)"
             onChange={handleInputChange}
-            value={hoursOfExercise}
+            value={exerciseLength}
           />
           <Checkbox
-            checked={ateBeforeExercise}
+            checked={eatBefore}
             onCheck={handleInputChange}
-            name="ateBeforeExercise"
+            name="eatBefore"
             label="Did you eat within an hour before you exercised?"
           />
           <Checkbox
-            checked={ateAfterExercise}
+            checked={eatAfter}
             onCheck={handleInputChange}
-            name="ateAfterExercise"
+            name="eatAfter"
             label="Did you eat within an hour after you exercised?"
           />
         </CardText>
@@ -182,14 +182,14 @@ const StatusCard = (props) => {
 
 StatusCard.propTypes = {
   disabled: PropTypes.bool.isRequired,
+  handleCardExpandedChange: PropTypes.func.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+  handleSliderChange: PropTypes.func.isRequired,
   isOpened: PropTypes.shape({
     nutrition: PropTypes.bool.isRequired,
     fitness: PropTypes.bool.isRequired,
     wellness: PropTypes.bool.isRequired,
   }).isRequired,
-  handleInputChange: PropTypes.func.isRequired,
-  handleCardExpandedChange: PropTypes.func.isRequired,
-  handleSliderChange: PropTypes.func.isRequired,
   statusEntry: CustomPropTypes.statusEntry.isRequired,
 };
 

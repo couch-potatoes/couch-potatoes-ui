@@ -1,13 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { FlatButton } from 'material-ui';
-
 import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 
 import { createProfile, updateProfile, saveProfileToState } from '../actions/profile';
 import ProfileCard from '../components/ProfileCard';
 import EditProfile from '../views/EditProfile';
+import CustomPropTypes from '../util/custom-prop-types';
 
 class Profile extends Component {
   constructor(props) {
@@ -71,13 +71,7 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  profile: PropTypes.shape({
-    age: PropTypes.number,
-    gender: PropTypes.string,
-    height: PropTypes.number,
-    sports: PropTypes.arrayOf(PropTypes.string),
-    weight: PropTypes.number,
-  }).isRequired,
+  profile: CustomPropTypes.profile.isRequired,
 };
 
 const mapStateToProps = (state) => {

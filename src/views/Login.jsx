@@ -154,14 +154,19 @@ class Login extends Component {
               primary
             />
           </Link>
-          <br/>
-          <Link
-            to="/forgot-password"
-            className="login-form-link"
-          >
-            Forgot Password?
-          </Link>
         </Paper>
+        <Link to="/forgot-password" className="paper-link">
+          <Paper
+            children="Forget Password?"
+            className="link-paper"
+          />
+        </Link>
+        <Link to="/about" className="paper-link">
+          <Paper
+            children="About"
+            className="link-paper"
+          />
+        </Link>
       </div>
     );
   }

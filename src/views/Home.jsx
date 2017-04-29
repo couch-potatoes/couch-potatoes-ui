@@ -24,6 +24,18 @@ export class Home extends Component {
               primary
             />
           </Link>
+          <Link to="/register-researcher" className="paper-link">
+            <Paper
+              children="Register a researcher"
+              className="link-paper"
+            />
+          </Link>
+          <Link to="/about" className="paper-link">
+            <Paper
+              children="About"
+              className="link-paper"
+            />
+          </Link>
         </div>
       );
     }
@@ -41,13 +53,19 @@ export class Home extends Component {
             className="link-paper"
           />
         </Link>
+        <Link to="/about" className="paper-link">
+          <Paper
+            children="About"
+            className="link-paper"
+          />
+        </Link>
       </div>
     );
   }
 }
 
 Home.propTypes = {
-  userType: PropTypes.string.isRequired,
+  userType: PropTypes.oneOf(['participant', 'researcher']).isRequired,
 };
 
 const mapStateToProps = (state) => {

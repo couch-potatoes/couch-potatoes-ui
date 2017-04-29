@@ -11,21 +11,21 @@ import {
   updateStatusEntry,
 } from '../actions/statusEntry';
 import StatusCard from '../components/StatusCard';
-import dates from '../util/dates';
 import CustomPropTypes from '../util/custom-prop-types';
+import dates from '../util/dates';
 
 const defaultStatusEntry = () => ({
-  ateBeforeExercise: false,
-  ateAfterExercise: false,
+  breakfast: false,
   calories: 0,
   carbs: 0,
-  didEatBreakfast: false,
+  eatAfter: false,
+  eatBefore: false,
   energyLevel: 0,
+  exerciseLength: 0,
   fats: 0,
-  hoursOfExercise: 0,
-  hoursOfSleep: 0,
-  numOfMeals: 0,
+  numMeals: 0,
   proteins: 0,
+  sleepLength: 0,
   sleepQuality: 0,
   stressLevel: 0,
 });
@@ -226,7 +226,7 @@ class StatusLog extends Component {
 }
 
 StatusLog.propTypes = {
-  statusLog: CustomPropTypes.statusLog,
+  statusLog: CustomPropTypes.statusLog.isRequired,
 };
 
 const mapStateToProps = (state) => {
