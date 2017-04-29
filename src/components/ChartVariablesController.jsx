@@ -25,6 +25,7 @@ const ChartVariablesController = (props) => {
   return (
     <Card>
       <DatePicker
+        floatingLabelText="Start of Range Date"
         name="startDate"
         container="inline"
         locale="en-US"
@@ -35,6 +36,7 @@ const ChartVariablesController = (props) => {
         onChange={handleDateChange('startDate')}
       />
       <DatePicker
+        floatingLabelText="End of Date Range"
         name="endDate"
         container="inline"
         locale="en-US"
