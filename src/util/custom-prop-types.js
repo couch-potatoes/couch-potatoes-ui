@@ -1,16 +1,16 @@
 import { PropTypes } from 'react';
 
 const statusEntry = PropTypes.shape({
-  ateAfterExercise: PropTypes.bool.isRequired,
-  ateBeforeExercise: PropTypes.bool.isRequired,
+  eatAfter: PropTypes.bool.isRequired,
+  eatBefore: PropTypes.bool.isRequired,
   calories: PropTypes.number.isRequired,
   carbs: PropTypes.number.isRequired,
-  didEatBreakfast: PropTypes.bool.isRequired,
+  breakfast: PropTypes.bool.isRequired,
   energyLevel: PropTypes.number.isRequired,
   fats: PropTypes.number.isRequired,
-  hoursOfExercise: PropTypes.number.isRequired,
-  hoursOfSleep: PropTypes.number.isRequired,
-  numOfMeals: PropTypes.number.isRequired,
+  exerciseLength: PropTypes.number.isRequired,
+  sleepLength: PropTypes.number.isRequired,
+  numMeals: PropTypes.number.isRequired,
   proteins: PropTypes.number.isRequired,
   sleepQuality: PropTypes.number.isRequired,
   stressLevel: PropTypes.number.isRequired,

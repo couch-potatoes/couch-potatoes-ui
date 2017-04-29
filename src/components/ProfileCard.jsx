@@ -6,6 +6,7 @@ import {
 
 import GenderSelectField from './GenderSelectField';
 import SportSelectField from './SportSelectField';
+import CustomPropTypes from '../util/custom-prop-types';
 
 const styles = {
   paper: {
@@ -85,13 +86,7 @@ ProfileCard.propTypes = {
   handleTextFieldChange: PropTypes.func,
   handleGenderFieldChange: PropTypes.func,
   handleSportsFieldChange: PropTypes.func,
-  profile: PropTypes.shape({
-    age: PropTypes.number,
-    weight: PropTypes.number,
-    height: PropTypes.number,
-    gender: PropTypes.string,
-    sports: PropTypes.arrayOf(PropTypes.string),
-  }).isRequired,
+  profile: CustomPropTypes.profile.isRequired,
 };
 
 export default ProfileCard;

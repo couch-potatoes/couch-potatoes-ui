@@ -10,7 +10,7 @@ export class Home extends Component {
     if (userType === 'researcher') {
       return (
         <div>
-          Researcher view
+          <h1>Researcher view</h1>
         </div>
       );
     }
@@ -28,13 +28,19 @@ export class Home extends Component {
             className="link-paper"
           />
         </Link>
+        <Link to="/about" className="paper-link">
+          <Paper
+            children="About"
+            className="link-paper"
+          />
+        </Link>
       </div>
     );
   }
 }
 
 Home.propTypes = {
-  userType: PropTypes.string.isRequired,
+  userType: PropTypes.oneOf(['participant', 'researcher']).isRequired,
 };
 
 const mapStateToProps = (state) => {
