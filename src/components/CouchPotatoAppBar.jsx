@@ -12,11 +12,16 @@ class CouchPotatoAppBar extends Component {
   constructor(props) {
     super(props);
     this.routeToHome = this.routeToHome.bind(this);
+    this.routeToLogin = this.routeToLogin.bind(this);
     this.signOut = this.signOut.bind(this);
   }
   routeToHome() {
     const { history } = this.props;
     history.push('/');
+  }
+  routeToLogin() {
+    const { history } = this.props;
+    history.push('/login');
   }
   signOut() {
     const { dispatch, history } = this.props;
@@ -27,11 +32,17 @@ class CouchPotatoAppBar extends Component {
     const {
       isLoggedIn,
     } = this.props;
+    let iconElementRight;
+    if (isLoggedIn) {
+      iconElementRight = <Menu signOut={this.signOut} />;
+    } else {
+      iconElementRight = <Login loginCallback={this.routeToLogin} />;
+    }
     return (
       <div>
         <AppBar
           title="Athlete Tracker Program"
-          iconElementRight={isLoggedIn ? <Menu signOut={this.signOut} /> : <Login />}
+          iconElementRight={iconElementRight}
           onTitleTouchTap={this.routeToHome}
           showMenuIconButton={false}
         />

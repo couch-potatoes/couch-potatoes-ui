@@ -2,13 +2,19 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
+import CustomPropTypes from '../util/custom-prop-types';
+
 export class WithAuth extends React.Component {
   render() {
     const {
       children,
       isLoggedIn,
+      requiredUserType,
+      userType,
     } = this.props;
-    if (!isLoggedIn) {
+    // Redirect user to Login if he/she is not logged in, or if they aren't
+    // authorized to view the resource
+    if (!isLoggedIn || (requiredUserType && userType !== requiredUserType)) {
       // Redirect user to login page
       return (
         <Redirect to="login"/>
@@ -22,16 +28,25 @@ const mapStateToProps = (state) => {
   const {
     account: {
       isLoggedIn,
+      userType,
     },
   } = state;
 
   return {
     isLoggedIn,
+    userType,
   };
 };
 
 WithAuth.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
+  requiredUserType: CustomPropTypes.userType,
+  userType: CustomPropTypes.userType
+};
+
+WithAuth.defaultProps = {
+  requiredUserType: '',
+  userType: '',
 };
 
 export default connect(mapStateToProps)(WithAuth);

@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import {
-  TextField,
   Paper,
   RaisedButton,
+  TextField,
 } from 'material-ui';
+import { withRouter } from 'react-router-dom';
 
-import { registerUser } from '../actions/auth';
+import { createUser } from '../actions/auth';
 import { addNotification } from '../actions/notifications';
 
 class Registration extends React.Component {
@@ -16,6 +17,7 @@ class Registration extends React.Component {
       email: '',
       password: '',
       confirmPassword: '',
+      isResearcher: false,
     };
 
     this.onTextFieldChange = this.onTextFieldChange.bind(this);
@@ -42,7 +44,7 @@ class Registration extends React.Component {
       history,
     } = this.props;
 
-    history.push('login');
+    history.push('/');
   }
 
   onSubmit(e) {
@@ -51,22 +53,22 @@ class Registration extends React.Component {
     const {
       dispatchAddNotification,
       dispatchRegisterUser,
-      history,
     } = this.props;
 
     const {
       email,
       password,
       confirmPassword,
+      isResearcher,
     } = this.state;
 
     if (password !== confirmPassword) {
       dispatchAddNotification('Passwords do not match');
       return;
     }
-    dispatchRegisterUser({email, password})
+    dispatchRegisterUser({email, password}, isResearcher)
       .then(() => {
-        history.push('/profile');
+        dispatchAddNotification('User created!');
       }, () => {
         dispatchAddNotification('Error creating account');
       });
@@ -75,7 +77,7 @@ class Registration extends React.Component {
   render() {
     return (
       <div id="register-new-account">
-        <div className="page-title">Register New Account</div>
+        <div className="page-title">Register A Researcher</div>
         <Paper id="registration-wrapper">
           <TextField
             name="email"
@@ -86,9 +88,7 @@ class Registration extends React.Component {
             fullWidth={true}
             value={this.state.email}
           />
-
           <br/>
-
           <TextField
             name="password"
             onChange={this.onTextFieldChange}
@@ -97,9 +97,7 @@ class Registration extends React.Component {
             fullWidth={true}
             value={this.state.password}
           />
-
           <br />
-
           <TextField
             name="confirmPassword"
             onChange={this.onTextFieldChange}
@@ -108,15 +106,13 @@ class Registration extends React.Component {
             fullWidth={true}
             value={this.state.confirmPassword}
           />
-          <br />
-
+          <br/>
           <RaisedButton
             name="submit"
             label="Submit"
             onTouchTap={this.onSubmit}
             primary={true}
           />
-
           <RaisedButton
             className="inline-button"
             label="Cancel"
@@ -137,8 +133,8 @@ Registration.propTypes = {
 const mapDispatchToProps = dispatch => ({
   dispatchAddNotification: (msg) => { dispatch(addNotification(msg)); },
   dispatchRegisterUser: (accountData, isResearcher) => (
-    dispatch(registerUser(accountData, isResearcher))
+    dispatch(createUser(accountData, isResearcher))
   ),
 });
 
-export default connect(undefined, mapDispatchToProps)(Registration);
+export default withRouter(connect(undefined, mapDispatchToProps)(Registration));

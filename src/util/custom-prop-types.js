@@ -26,8 +26,11 @@ const profile = PropTypes.shape({
   weight: PropTypes.number,
 });
 
+const userType = PropTypes.oneOf([ '', 'participant', 'researcher']);
+
 export default {
   profile,
   statusEntry,
   statusLog,
+  userType,
 };

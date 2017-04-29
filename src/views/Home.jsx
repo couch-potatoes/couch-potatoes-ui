@@ -11,6 +11,18 @@ export class Home extends Component {
       return (
         <div>
           <h1>Researcher view</h1>
+          <Link to="/register-researcher" className="paper-link">
+            <Paper
+              children="Register a researcher"
+              className="link-paper"
+            />
+          </Link>
+          <Link to="/about" className="paper-link">
+            <Paper
+              children="About"
+              className="link-paper"
+            />
+          </Link>
         </div>
       );
     }

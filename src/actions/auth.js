@@ -42,45 +42,36 @@ const invalidateUserCredentials = () => ({
 
 export const logout = () => {
   return (dispatch, getState) => {
-    const { account: { token } } = getState();
+    const { account: { token, userType } } = getState();
+    const url = `${userType === 'participant' ? participantEndpoint : researcherEndpoint}/logout`;
     dispatch(invalidateUserCredentials());
     return axios({
       method: 'POST',
       headers: {
         Authorization: token
       },
-      url: `${participantEndpoint}/logout`,
+      url,
     });
   };
 };
 
-export const registerParticipant = (accountData) => {
+export const createUser = (accountData, isResearcher = false) => () => (
+  axios({
+    method: 'POST',
+    url: isResearcher ? researcherEndpoint : participantEndpoint,
+    data: accountData,
+  })
+);
+
+export const registerUser = (accountData, isResearcher = false) => {
   return (dispatch) => {
-    return axios({
-      method: 'POST',
-      url: participantEndpoint,
-      data: accountData,
-    })
+    return createUser(accountData, isResearcher)
       .then(() => {
         // Log the user in if registration was successful
         const { email, password } = accountData;
-        return dispatch(login(email, password));
+        return dispatch(login(email, password, isResearcher));
       }, (err) => {
         throw err;
       });
-  };
-};
-
-export const updateParticipant = (accountData) => {
-  return (dispatch, getState) => {
-    const { account: { token, userId } } = getState();
-    return axios({
-      method: 'PUT',
-      url: `${participantEndpoint}/${userId}`,
-      data: accountData,
-      headers: {
-        Authorization: token,
-      },
-    });
   };
 };
