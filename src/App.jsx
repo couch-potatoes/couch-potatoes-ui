@@ -18,6 +18,7 @@ import StatusLog from './views/StatusLog';
 import NutritionCharts from './views/NutritionCharts.jsx';
 import SECharts from './views/SECharts.jsx';
 import Register from './views/Register';
+import ResearchCreation from './views/ResearcherCreation';
 import ResetPassword from './views/ResetPassword';
 
 const App = () => (
