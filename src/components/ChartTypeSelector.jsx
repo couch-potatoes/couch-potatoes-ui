@@ -15,7 +15,6 @@ const ChartTypeSelector = ({ onChange, value }) => (
     <MenuItem value="" primaryText="" />
     <MenuItem value="nutrition" primaryText="Nutrition" />
     <MenuItem value="wellness" primaryText="Wellness" />
-    <MenuItem value="fitness" primaryText="Fitness" />
   </SelectField>
 );
 

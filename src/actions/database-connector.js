@@ -18,19 +18,53 @@ export const encodeQueryConfig = (queryConfig) => {
   return `chart=${chartType}&startDate=${startDate}&endDate=${endDate}&gender=${gender}&sports=${sports.join('+')}`;
 };
 
-const transformResponseDataRow = ({ date, calories, carbs, proteins, fats }) => ([
-  date,
-  parseInt(calories, 10),
-  parseInt(carbs, 10),
-  parseInt(proteins, 10),
-  parseInt(fats, 10),
-]);
+const getColumnHeaders = (chartType) => {
+  switch (chartType) {
+  case 'nutrition': {
+    return ['Date', 'Calories', 'Carbs (g)', 'Fat (g)', 'Protein'];
+  }
+  case 'wellness': {
+    return ['Date', 'Calories', 'Carbs (g)', 'Fat (g)', 'Protein'];
+  }
+  default: {
+    return [];
+  }
+  }
+};
 
-const transformResponseData = (dates) => {
-  const columnsHeaders = ['Date', 'Calories', 'Carbs (g)', 'Fat (g)', 'Protein'];
+const transformResponseDataRow = (chartType, dataRow) => {
+  switch (chartType) {
+  case 'nutrition': {
+    const { date, calories, carbs, proteins, fats } = dataRow;
+    return [
+      date,
+      parseInt(calories, 10),
+      parseInt(carbs, 10),
+      parseInt(proteins, 10),
+      parseInt(fats, 10),
+    ];
+  }
+  case 'wellness': {
+    const { date, sleepQuality, sleepLength, stressLevel, energyLevel } = dataRow;
+    return [
+      date,
+      parseInt(sleepQuality, 10),
+      parseInt(sleepLength, 10),
+      parseInt(stressLevel, 10),
+      parseInt(energyLevel, 10),
+    ];
+  }
+  default: {
+    return [];
+  }
+  }
+};
+
+const transformResponseData = (chartType, dates) => {
+  const columnsHeaders = getColumnHeaders(chartType);
   const dataRows =
     Object.keys(dates)
-      .map(date => transformResponseDataRow(dates[date]));
+      .map(date => transformResponseDataRow(chartType, dates[date]));
   return [columnsHeaders].concat(dataRows);
 };
 
@@ -48,7 +82,7 @@ export const fetchAggregatedData = (queryConfig) => dispatch => {
       if (status !== 200) {
         throw res;
       }
-      return transformResponseData(data);
+      return transformResponseData(queryConfig.chartType, data);
     })
     .catch((err) => {
       dispatch(closeNotification());
