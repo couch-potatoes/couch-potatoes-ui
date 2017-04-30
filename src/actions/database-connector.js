@@ -7,7 +7,7 @@ const requestHeaders = {
   'Content-Type': 'application/x-www-form-urlencoded',
 };
 
-const encodeQueryConfig = (queryConfig) => {
+export const encodeQueryConfig = (queryConfig) => {
   const {
     chartType,
     startDate,

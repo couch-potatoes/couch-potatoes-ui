@@ -1,10 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   RaisedButton,
 } from 'material-ui';
 
-import { fetchAggregatedData } from '../actions/database-connector';
+import { encodeQueryConfig, fetchAggregatedData } from '../actions/database-connector';
 import ChartDisplayer from '../components/ChartDisplayer';
 import ChartVariablesController from '../components/ChartVariablesController';
 import dates from '../util/dates';
@@ -18,6 +18,19 @@ const validateChartQueryData = (chartQueryData) => {
     startDate,
   } = chartQueryData;
   return chartType && endDate && gender && sports.length && startDate;
+};
+
+const makeDownloadUrl = (chartQueryData, formatType) => (
+  `${process.env.REACT_APP_PHP_API_URL}?${encodeQueryConfig(chartQueryData)}&type=${formatType}`
+);
+
+const styles = {
+  flexButtons: {
+    display: 'flex',
+    flexFlow: 'row nowrap',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
 };
 
 class ChartsView extends Component {
@@ -81,6 +94,10 @@ class ChartsView extends Component {
   }
 
   fetchChartData() {
+    // Reset the chartData
+    this.setState({
+      chartData: [],
+    });
     const { chartQueryData } = this.state;
     const { dispatch } = this.props;
     dispatch(fetchAggregatedData(chartQueryData))
@@ -106,22 +123,36 @@ class ChartsView extends Component {
           handleGenderFieldChange={this.handleGenderFieldChange}
           handleSportsFieldChange={this.handleSportsFieldChange}
         />
-        <RaisedButton
-          disabled={!validateChartQueryData(chartQueryData)}
-          className="inline-button"
-          label="Fetch Data"
-          onTouchTap={this.fetchChartData}
-          primary
-          type="submit"
-        />
+        <div style={styles.flexButtons}>
+          <RaisedButton
+            disabled={!validateChartQueryData(chartQueryData)}
+            className="inline-button"
+            label="Fetch Data"
+            onTouchTap={this.fetchChartData}
+            primary
+            type="submit"
+          />
+          <RaisedButton
+            className="inline-button"
+            label="View data as a table"
+            href={makeDownloadUrl(chartQueryData, 'html')}
+            target="_blank"
+            disabled={!(chartData.length)}
+            primary
+          />
+          <RaisedButton
+            className="inline-button"
+            label="Download data as CSV"
+            href={makeDownloadUrl(chartQueryData, 'csv')}
+            target="_blank"
+            disabled={!(chartData.length)}
+            primary
+          />
+        </div>
         <ChartDisplayer chartData={chartData} />
       </div>
     );
   }
 }
-
-ChartsView.propTypes = {
-  dispatchFetchChartData: PropTypes.func.isRequired,
-};
 
 export default connect()(ChartsView);
