@@ -5,16 +5,19 @@ import {
   DatePicker,
 } from 'material-ui';
 
+import ChartTypeSelector from './ChartTypeSelector';
 import GenderSelectField from './GenderSelectField';
 import SportSelectField from './SportSelectField';
 import dates from '../util/dates';
 
 const ChartVariablesController = (props) => {
   const {
+    handleChartTypeChange,
     handleDateChange,
     handleGenderFieldChange,
     handleSportsFieldChange,
     chartQueryData: {
+      chartType,
       endDate,
       gender,
       sports,
@@ -24,6 +27,10 @@ const ChartVariablesController = (props) => {
 
   return (
     <Card>
+      <ChartTypeSelector
+        onChange={handleChartTypeChange}
+        value={chartType}
+      />
       <DatePicker
         floatingLabelText="Start of Range Date"
         name="startDate"
@@ -63,11 +70,12 @@ const ChartVariablesController = (props) => {
 
 ChartVariablesController.propTypes = {
   chartQueryData: PropTypes.shape({
-    startDate: PropTypes.string,
-    endDate: PropTypes.string,
+    startDate: PropTypes.date,
+    endDate: PropTypes.date,
     gender: PropTypes.string,
     sports: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
+  handleChartTypeChange: PropTypes.func.isRequired,
   handleDateChange: PropTypes.func.isRequired,
   handleGenderFieldChange: PropTypes.func.isRequired,
   handleSportsFieldChange: PropTypes.func.isRequired,

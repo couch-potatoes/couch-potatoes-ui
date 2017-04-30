@@ -1,11 +1,14 @@
 export const currentDate = new Date();
+let yesterday = new Date();
+yesterday.setDate(yesterday.getDate() - 1);
 let minDate = new Date();
-minDate.setFullYear(currentDate.getFullYear() - 1);
+minDate.setFullYear(minDate.getFullYear() - 1);
 let maxDate = new Date();
-maxDate.setFullYear(currentDate.getFullYear() + 1);
+maxDate.setFullYear(maxDate.getFullYear() + 1);
 
 export default {
   currentDate,
+  yesterday,
   maxDate,
   minDate,
 };
