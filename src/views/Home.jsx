@@ -23,6 +23,12 @@ export class Home extends Component {
               className="link-paper"
             />
           </Link>
+          <a href="https://potatoes-db.herokuapp.com/db-backup.php" className="paper-link">
+            <Paper
+              children="Export Database"
+              className="link-paper"
+            />
+          </a>
           <Link to="/about" className="paper-link">
             <Paper
               children="About"
