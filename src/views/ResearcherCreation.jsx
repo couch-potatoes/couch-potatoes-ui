@@ -59,14 +59,13 @@ class Registration extends React.Component {
       email,
       password,
       confirmPassword,
-      isResearcher,
     } = this.state;
 
     if (password !== confirmPassword) {
       dispatchAddNotification('Passwords do not match');
       return;
     }
-    dispatchRegisterUser({email, password}, isResearcher)
+    dispatchRegisterUser({email, password}, true)
       .then(() => {
         dispatchAddNotification('User created!');
       }, () => {
