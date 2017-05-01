@@ -73,7 +73,9 @@ export const createStatusEntry = (date, statusEntry) => (dispatch, getState) => 
     data: entry,
   })
     .then(() => {
-      dispatch(cacheStatusEntry(date, statusEntry));
+      const correctDate = new Date(date);
+      correctDate.setDate(correctDate.getDate() - 1);
+      dispatch(cacheStatusEntry(correctDate.toDateString(), statusEntry));
     });
 };
 

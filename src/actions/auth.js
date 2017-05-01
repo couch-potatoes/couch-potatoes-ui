@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { addNotification, closeNotification } from './notifications';
 import { makeAPIEndpoint } from '../util/api';
 
 export const LOGIN = 'LOGIN';
@@ -22,6 +23,7 @@ export const saveUserCredentials = (token, userId, isResearcher) => ({
 
 export const login = (email, password, isResearcher = false) => {
   return (dispatch) => {
+    dispatch(addNotification('Signing in...'));
     return axios({
       method: 'POST',
       url: `${isResearcher ? researcherEndpoint : participantEndpoint}/login`,
@@ -30,6 +32,7 @@ export const login = (email, password, isResearcher = false) => {
         password
       },
     }).then((res) => {
+      dispatch(closeNotification());
       const { id: token, userId } = res.data;
       dispatch(saveUserCredentials(token, userId, isResearcher));
     });

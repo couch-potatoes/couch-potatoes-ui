@@ -6,9 +6,11 @@ import {
 
 import CouchPotatoAppBar from './components/CouchPotatoAppBar';
 import NotificationSnackbar from './components/NotificationSnackbar';
+import ResearcherOnly from './components/ResearcherOnly';
 import WithAuth from './components/WithAuth';
 
 import About from './views/About';
+import ChartsView from './views/ChartsView';
 import ForgotPassword from './views/ForgotPassword';
 import Home from './views/Home';
 import Login from './views/Login';
@@ -27,7 +29,8 @@ const App = () => (
       <Route path="/login" component={Login} />
       <Route path="/forgot-password" component={ForgotPassword} />
       <Route path="/register" component={Register} />
-      <Route path="/register-researcher" render={() => <WithAuth requiredUserType="researcher"><ResearchCreation /></WithAuth>} />
+      <Route path="/register-researcher" render={() => <ResearcherOnly><ResearchCreation /></ResearcherOnly>} />
+      <Route path="/charts" render={() => <ResearcherOnly><ChartsView /></ResearcherOnly>} />
       <Route path="/profile" render={() => <WithAuth><Profile /></WithAuth>} />
       <Route path="/status" render={() => <WithAuth><StatusLog /></WithAuth>} />
       <Route path="/reset-password" render={() => <WithAuth><ResetPassword /></WithAuth>} />
