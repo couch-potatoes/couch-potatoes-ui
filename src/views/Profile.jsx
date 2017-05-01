@@ -5,6 +5,7 @@ import { FlatButton } from 'material-ui';
 import ModeEdit from 'material-ui/svg-icons/editor/mode-edit';
 
 import { createProfile, updateProfile, saveProfileToState } from '../actions/profile';
+import ChangePasswordCard from '../components/ChangePasswordCard';
 import ProfileCard from '../components/ProfileCard';
 import EditProfile from '../views/EditProfile';
 import CustomPropTypes from '../util/custom-prop-types';
@@ -56,15 +57,21 @@ class Profile extends Component {
       );
     }
     return (
-      <div id="profile-information">
-        <ProfileCard
-          disabled
-          profile={profile}
-        />
-        <FlatButton
-          icon={<ModeEdit />}
-          onTouchTap={this.switchEditMode}
-        />
+      <div>
+        <div id="profile-information">
+          <ProfileCard
+            disabled
+            profile={profile}
+          />
+          <FlatButton
+            icon={<ModeEdit />}
+            onTouchTap={this.switchEditMode}
+          />
+        </div>
+        <div id="profile-information">
+          <h1>Change your password</h1>
+          <ChangePasswordCard />
+        </div>
       </div>
     );
   }

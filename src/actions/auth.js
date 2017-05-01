@@ -78,3 +78,28 @@ export const registerUser = (accountData, isResearcher = false) => {
       });
   };
 };
+
+export const changeUserPassword = (oldPassword, newPassword) => (dispatch, getState) => {
+  const { account: { token, userType }} = getState();
+  const url = `${userType === 'researcher' ? researcherEndpoint : participantEndpoint}/change-password`;
+  dispatch(addNotification('Changing your password...'));
+  return axios({
+    method: 'POST',
+    headers: {
+      Authorization: token,
+    },
+    url,
+    data: {
+      oldPassword,
+      newPassword,
+    },
+  })
+    .then(() => {
+      dispatch(closeNotification());
+      dispatch(addNotification('Password changed'));
+    })
+    .catch(() => {
+      dispatch(closeNotification());
+      dispatch(addNotification('Error changing your password; please try again'));
+    });
+};
