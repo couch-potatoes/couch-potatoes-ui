@@ -27,7 +27,11 @@ const GenderSelector = (props) => {
 GenderSelector.propTypes = {
   disabled: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.string,
+};
+
+GenderSelector.defaultProps = {
+  value: '',
 };
 
 export default GenderSelector;

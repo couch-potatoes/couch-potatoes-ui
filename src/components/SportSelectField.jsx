@@ -62,9 +62,14 @@ const SportSelectField = (props) => {
 
 SportSelectField.propTypes = {
   disabled: PropTypes.bool.isRequired,
-  gender: PropTypes.string.isRequired,
+  gender: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.arrayOf(PropTypes.string).isRequired,
+  value: PropTypes.arrayOf(PropTypes.string),
+};
+
+SportSelectField.defaultProps = {
+  gender: '',
+  value: [],
 };
 
 export default SportSelectField;

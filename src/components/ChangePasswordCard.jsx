@@ -18,6 +18,11 @@ const styles = {
   },
 };
 
+    //function to validate passwords
+const validatePasswords = ({ currentPassword, newPassword, newPasswordAgain }) => {
+  return currentPassword && newPassword && newPasswordAgain && newPassword === newPasswordAgain;
+};
+  
     //component to handle changing password
 class ChangePasswordCard extends React.Component {
   constructor(props) {
@@ -54,7 +59,7 @@ class ChangePasswordCard extends React.Component {
     const {
       dispatch,
     } = this.props;
-    if (newPassword !== newPasswordAgain) {
+    if (validatePasswords({currentPassword, newPassword, newPasswordAgain})) {
       dispatch(addNotification('Passwords do not match'));
       return;
     }
@@ -107,7 +112,8 @@ class ChangePasswordCard extends React.Component {
           />
         </Card>
         <RaisedButton
-          className="inline-button"
+          disabled={!validatePasswords(this.state)}
+          primary
           label="Submit"
           onTouchTap={this.changePassword}
         />

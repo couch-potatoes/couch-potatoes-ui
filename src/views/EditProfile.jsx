@@ -130,7 +130,7 @@ EditProfile.propTypes = {
     height: PropTypes.number,
     sports: PropTypes.arrayOf(PropTypes.string),
     weight: PropTypes.number,
-  }).isRequired,
+  }),
 };
 
 export default EditProfile;

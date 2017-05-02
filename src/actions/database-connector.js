@@ -15,7 +15,13 @@ export const encodeQueryConfig = (queryConfig) => {
     gender,
     sports,
   } = queryConfig;
-  return `chart=${chartType}&startDate=${startDate}&endDate=${endDate}&gender=${gender}&sports=${sports.join('+')}`;
+  return [
+    `chart=${chartType === 'wellness' ? 'sleep-energy' : chartType}`,
+    `startDate=${startDate}`,
+    `endDate=${endDate}`,
+    `gender=${ gender ? gender : 'na'}`,
+    `sports=${ sports.length ? sports.join('+') : 'na'}`,
+  ].join('&');
 };
 
 const getColumnHeaders = (chartType) => {
@@ -24,7 +30,7 @@ const getColumnHeaders = (chartType) => {
     return ['Date', 'Calories', 'Carbs (g)', 'Fat (g)', 'Protein'];
   }
   case 'wellness': {
-    return ['Date', 'Calories', 'Carbs (g)', 'Fat (g)', 'Protein'];
+    return ['Date', 'Sleep Quality', 'Hours slept', 'Stress Level', 'Energy Level'];
   }
   default: {
     return [];

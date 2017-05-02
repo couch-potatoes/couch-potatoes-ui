@@ -58,7 +58,7 @@ export const logout = () => {
   };
 };
 
-export const createUser = (accountData, isResearcher = false) => () => (
+export const createUser = (accountData, isResearcher = false) => (
   axios({
     method: 'POST',
     url: isResearcher ? researcherEndpoint : participantEndpoint,

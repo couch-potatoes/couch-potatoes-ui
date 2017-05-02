@@ -14,11 +14,9 @@ const validateChartQueryData = (chartQueryData) => {
   const {
     chartType,
     endDate,
-    gender,
-    sports,
     startDate,
   } = chartQueryData;
-  return chartType && endDate && gender && sports.length && startDate;
+  return chartType && endDate && startDate;
 };
 
     // function to create url
