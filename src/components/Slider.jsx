@@ -3,6 +3,7 @@ import { Slider as MaterialUiSlider } from 'material-ui';
 
 const STEP = 1;
 
+    //function for slider
 const Slider = props => {
   const {
     max,
@@ -12,6 +13,8 @@ const Slider = props => {
     value,
     label,
   } = props;
+
+      //return code to render slider
   return (
     <div>
       <span>
@@ -39,6 +42,7 @@ Slider.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
+    //slider default properties
 Slider.defaultProps = {
   max: 10,
   min: 0,

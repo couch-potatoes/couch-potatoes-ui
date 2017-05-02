@@ -6,6 +6,7 @@ const style = {
   color: 'white',
 };
 
+    //function for action on login button
 const Login = ({ loginCallback }) => (
   <FlatButton
     label="Login"

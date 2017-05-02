@@ -4,6 +4,7 @@ import Snackbar from 'material-ui/Snackbar';
 
 import { closeNotification } from '../actions/notifications';
 
+    //function to handle showing notifications
 const NotificationSnackbar = (props) => {
   const {
     closeNotification,
@@ -11,6 +12,7 @@ const NotificationSnackbar = (props) => {
     message,
   } = props;
 
+    //show a little bar at the bottom
   return (
     <Snackbar
       open={displayed}
@@ -27,6 +29,7 @@ NotificationSnackbar.propTypes = {
   message: PropTypes.string,
 };
 
+    //get message for notification
 NotificationSnackbar.defaultProps = {
   message: '',
 };

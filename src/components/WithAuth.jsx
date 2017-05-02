@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 import CustomPropTypes from '../util/custom-prop-types';
 
+    //component for restricting access
 export class WithAuth extends React.Component {
   render() {
     const {
@@ -38,12 +39,14 @@ const mapStateToProps = (state) => {
   };
 };
 
+    //properties required to restrict access
 WithAuth.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   requiredUserType: CustomPropTypes.userType,
   userType: CustomPropTypes.userType
 };
 
+    //default properties for access restriction control
 WithAuth.defaultProps = {
   requiredUserType: '',
   userType: '',

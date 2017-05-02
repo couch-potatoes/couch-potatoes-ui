@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Paper, TextField, RaisedButton } from 'material-ui';
 
+    //component for reset password page
 class ResetPassword extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +16,7 @@ class ResetPassword extends React.Component {
     this.onCancel = this.onCancel.bind(this);
   }
 
+    //function to handle when changing any text field
   handleOnChange(e) {
     const {
       target: {
@@ -27,6 +29,7 @@ class ResetPassword extends React.Component {
     });
   }
 
+    //function to handle when hitting cancel
   onCancel(e) {
     e.preventDefault();
 
@@ -37,6 +40,7 @@ class ResetPassword extends React.Component {
     history.push('login');
   }
 
+    //function to handle when hitting submit
   onSubmit(e) {
     e.preventDefault();
 
@@ -64,6 +68,7 @@ class ResetPassword extends React.Component {
     history.push('login');
   }
 
+    //render the UI
   render() {
     const {
       newPassword,

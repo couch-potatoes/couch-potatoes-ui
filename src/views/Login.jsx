@@ -17,6 +17,7 @@ const validateState = ({ email, password }) => {
   return !!(email && password);
 };
 
+    //component for login page
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -31,10 +32,12 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+    //mount email field
   componentDidMount() {
     this.email.focus();
   }
 
+    //function to handle when any text field is changed
   handleOnChange(ev) {
     const {
       target: {
@@ -47,12 +50,14 @@ class Login extends Component {
     });
   }
 
+    //function to handle when the tickmark is added
   onCheck() {
     this.setState({
       isResearcher: !this.state.isResearcher,
     });
   }
 
+    //function to handle when hitting submit button
   onSubmit(ev) {
     ev.preventDefault();
 
@@ -102,6 +107,7 @@ class Login extends Component {
         });
   }
 
+    //render the UI
   render() {
     const {
       email,
@@ -109,6 +115,7 @@ class Login extends Component {
       isResearcher,
     } = this.state;
 
+      //return the fields for users to see
     return (
       <div id="login-form">
         <Paper className="link-paper">

@@ -17,6 +17,7 @@ const styles = {
   },
 };
 
+    //function to show profile information the card
 const ProfileCard = (props) => {
   const {
     disabled,
@@ -31,6 +32,8 @@ const ProfileCard = (props) => {
       sports,
     },
   } = props;
+
+      //return code to render profile card
   return (
     <Card style={styles.paper}>
       <GenderSelectField

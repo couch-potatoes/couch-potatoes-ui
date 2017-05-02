@@ -6,6 +6,7 @@ import {
 
 import SPORTS from '../util/constants/sports';
 
+    //menu items to choose gender from
 const makeMenuItems = (gender) => {
   if (gender) {
     return SPORTS[gender].map(sport => (
@@ -18,12 +19,14 @@ const makeMenuItems = (gender) => {
   return null;
 };
 
+    //field properties for sport selector
 const selectFieldProps = {
   fullWidth: true,
   id: 'sports',
   multiple: true,
 };
 
+    //function for handling sport field
 const SportSelectField = (props) => {
   const {
     disabled,
@@ -33,6 +36,7 @@ const SportSelectField = (props) => {
   } = props;
   const menuItems = makeMenuItems(gender);
 
+    //return code to render menu fields
   if (menuItems) {
     return (
       <SelectField

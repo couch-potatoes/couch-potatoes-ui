@@ -13,6 +13,7 @@ const initialState = {
   statusEntryCache: {},
 };
 
+    //export default values for initial state
 export default (state = initialState, { type, payload }) => {
   switch (type) {
   case actions.INVALIDATE_USER_CREDENTIALS: {

@@ -24,6 +24,7 @@ const validateState = (state) => {
   return true;
 };
 
+    //component to edit profile
 class EditProfile extends Component {
   constructor(props) {
     super(props);
@@ -36,6 +37,7 @@ class EditProfile extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+    //function to handle when gender field is changed
   handleGenderFieldChange(event, key, value) {
     this.setState({
       gender: value,
@@ -44,12 +46,14 @@ class EditProfile extends Component {
     });
   }
 
+    //function to handle when sports field is changed
   handleSportsFieldChange(event, key, value) {
     this.setState({
       sports: value,
     });
   }
 
+    //function to handle any text input field is changed
   handleTextFieldChange(event) {
     const {
       target: {
@@ -62,6 +66,7 @@ class EditProfile extends Component {
     });
   }
 
+    //function to handle when hitting submit button
   onSubmit(ev) {
     ev.preventDefault();
 
@@ -70,6 +75,7 @@ class EditProfile extends Component {
     }
   }
 
+    //render the user input fields
   render() {
     const { onCancel, profile } = this.props;
     // User doesn't have a profile, so they must be creating one
@@ -114,6 +120,7 @@ class EditProfile extends Component {
   }
 }
 
+    //equired data for showing and editing profile
 EditProfile.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,

@@ -4,6 +4,7 @@ import {
   SelectField,
 } from 'material-ui';
 
+    //function to handle when selecting genders
 const GenderSelector = (props) => {
   const { disabled, onChange, value } = props;
   return (

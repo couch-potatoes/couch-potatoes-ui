@@ -4,6 +4,7 @@ import {
   SelectField,
 } from 'material-ui';
 
+    //handle chart type changes
 const ChartTypeSelector = ({ onChange, value }) => (
   <SelectField
     fullWidth

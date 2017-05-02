@@ -18,6 +18,7 @@ const styles = {
   },
 };
 
+    //component to handle changing password
 class ChangePasswordCard extends React.Component {
   constructor(props) {
     super(props);
@@ -30,6 +31,7 @@ class ChangePasswordCard extends React.Component {
     this.changePassword = this.changePassword.bind(this);
   }
 
+    //function to handle when any text field is changed
   handleTextFieldChange(event) {
     const {
       target: {
@@ -42,6 +44,7 @@ class ChangePasswordCard extends React.Component {
     });
   }
 
+    //function to handle when password is changed
   changePassword() {
     const {
       currentPassword,
@@ -65,6 +68,7 @@ class ChangePasswordCard extends React.Component {
       });
   }
 
+    //render the UI
   render() {
     const {
       currentPassword,

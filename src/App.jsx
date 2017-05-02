@@ -21,6 +21,7 @@ import ResearchCreation from './views/ResearcherCreation';
 import ResetPassword from './views/ResetPassword';
 import StatusLog from './views/StatusLog';
 
+    //attach the links with their respective components
 const App = () => (
   <div>
     <CouchPotatoAppBar />

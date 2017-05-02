@@ -8,6 +8,7 @@ import Menu from './buttons/Menu';
 
 import { logout } from '../actions/auth';
 
+    //component for app bar
 class CouchPotatoAppBar extends Component {
   constructor(props) {
     super(props);
@@ -15,19 +16,26 @@ class CouchPotatoAppBar extends Component {
     this.routeToLogin = this.routeToLogin.bind(this);
     this.signOut = this.signOut.bind(this);
   }
+      //function to take to home
   routeToHome() {
     const { history } = this.props;
     history.push('/');
   }
+
+      //function to take to login
   routeToLogin() {
     const { history } = this.props;
     history.push('/login');
   }
+
+      //function to handle when sign out
   signOut() {
     const { dispatch, history } = this.props;
     dispatch(logout())
       .then(() => { history.push('/login'); });
   }
+
+      //render the app bar
   render() {
     const {
       isLoggedIn,

@@ -9,6 +9,7 @@ import {
 import { registerUser } from '../actions/auth';
 import { addNotification } from '../actions/notifications';
 
+    //component for registration page
 class Registration extends React.Component {
   constructor(props) {
     super(props);
@@ -23,6 +24,7 @@ class Registration extends React.Component {
     this.onCancel = this.onCancel.bind(this);
   }
 
+    //function to handle when any text field is changed
   onTextFieldChange(ev) {
     const {
       target: {
@@ -35,6 +37,7 @@ class Registration extends React.Component {
     });
   }
 
+    //function to handle when hidding cancel
   onCancel(e) {
     e.preventDefault();
 
@@ -45,6 +48,7 @@ class Registration extends React.Component {
     history.push('login');
   }
 
+    //function to handle when hitting submit
   onSubmit(e) {
     e.preventDefault();
 
@@ -72,6 +76,7 @@ class Registration extends React.Component {
       });
   }
 
+    //render the UI
   render() {
     return (
       <div id="register-new-account">
@@ -128,7 +133,7 @@ class Registration extends React.Component {
     );
   }
 }
-
+    //properties required for registration component
 Registration.propTypes = {
   dispatchAddNotification: PropTypes.func.isRequired,
   dispatchRegisterUser: PropTypes.func.isRequired,

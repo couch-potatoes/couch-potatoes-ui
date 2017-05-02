@@ -6,6 +6,7 @@ minDate.setFullYear(minDate.getFullYear() - 1);
 let maxDate = new Date();
 maxDate.setFullYear(maxDate.getFullYear() + 1);
 
+    //export the default dates
 export default {
   currentDate,
   yesterday,

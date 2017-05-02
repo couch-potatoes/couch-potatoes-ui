@@ -10,6 +10,7 @@ import {
 import Slider from './Slider';
 import CustomPropTypes from '../util/custom-prop-types';
 
+    //function to handle status entries on status card
 const StatusCard = (props) => {
   const {
     disabled,
@@ -37,6 +38,8 @@ const StatusCard = (props) => {
       fitness
     },
   } = props;
+
+      //return code to render UI
   return (
     <div>
       <Card
@@ -180,6 +183,7 @@ const StatusCard = (props) => {
   );
 };
 
+    //properties required for status card
 StatusCard.propTypes = {
   disabled: PropTypes.bool.isRequired,
   handleCardExpandedChange: PropTypes.func.isRequired,

@@ -15,6 +15,7 @@ class ForgotPassword extends React.Component {
     this.onCancel = this.onCancel.bind(this);
   }
 
+    //function to handle when input fields are changed
   handleOnChange(e) {
     const {
       target: {
@@ -27,6 +28,7 @@ class ForgotPassword extends React.Component {
     });
   }
 
+    //function to handle hitting cancel
   onCancel(e) {
     e.preventDefault();
 
@@ -37,6 +39,7 @@ class ForgotPassword extends React.Component {
     history.push('login');
   }
 
+    //function to handle hitting submit
   onSubmit(e) {
     e.preventDefault();
 
@@ -64,6 +67,7 @@ class ForgotPassword extends React.Component {
     history.push('login');
   }
 
+    //render the user interface of this component
   render() {
     return (
       <div id="pass-res-form">

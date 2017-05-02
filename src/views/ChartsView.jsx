@@ -9,6 +9,7 @@ import ChartDisplayer from '../components/ChartDisplayer';
 import ChartVariablesController from '../components/ChartVariablesController';
 import dates from '../util/dates';
 
+    // constant function to query data for charts
 const validateChartQueryData = (chartQueryData) => {
   const {
     chartType,
@@ -20,10 +21,12 @@ const validateChartQueryData = (chartQueryData) => {
   return chartType && endDate && gender && sports.length && startDate;
 };
 
+    // function to create url
 const makeDownloadUrl = (chartQueryData, formatType) => (
   `${process.env.REACT_APP_PHP_API_URL}?${encodeQueryConfig(chartQueryData)}&type=${formatType}`
 );
 
+    // style for buttons
 const styles = {
   flexButtons: {
     display: 'flex',
@@ -33,6 +36,7 @@ const styles = {
   },
 };
 
+    // component for chart views
 class ChartsView extends Component {
   constructor(props) {
     super(props);
@@ -53,6 +57,7 @@ class ChartsView extends Component {
     this.fetchChartData = this.fetchChartData.bind(this);
   }
 
+      //function to handle when date is chosen
   handleDateChange(key) {
     return (_, value) => {
       this.setState({
@@ -64,6 +69,7 @@ class ChartsView extends Component {
     };
   }
 
+      //function to handle when gender is chosen
   handleGenderFieldChange(event, key, value) {
     this.setState({
       chartQueryData: {
@@ -75,6 +81,7 @@ class ChartsView extends Component {
     });
   }
 
+      //function to handle when sports field is chosen
   handleSportsFieldChange(event, key, value) {
     this.setState({
       chartQueryData: {
@@ -84,6 +91,7 @@ class ChartsView extends Component {
     });
   }
 
+    //function to handle when chart type is chosen
   handleChartTypeChange(event, key, value) {
     this.setState({
       chartQueryData: {
@@ -93,6 +101,7 @@ class ChartsView extends Component {
     });
   }
 
+    //function to fetch data from backend server
   fetchChartData() {
     // Reset the chartData
     this.setState({
@@ -108,6 +117,7 @@ class ChartsView extends Component {
       });
   }
 
+    //render the user input and charts
   render() {
     const {
       chartData,

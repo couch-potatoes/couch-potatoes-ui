@@ -10,6 +10,7 @@ import ProfileCard from '../components/ProfileCard';
 import EditProfile from '../views/EditProfile';
 import CustomPropTypes from '../util/custom-prop-types';
 
+    //conponent for profile page
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +22,7 @@ class Profile extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+    //let this component receive properties of the user
   componentWillReceiveProps(nextProps) {
     if (!_.isEqual(this.props, nextProps)) {
       this.setState({
@@ -29,12 +31,14 @@ class Profile extends Component {
     }
   }
 
+    //function to handle switching between edit mode and viewing mode
   switchEditMode() {
     this.setState({
       isEditing: !this.state.isEditing,
     });
   }
 
+    //function to handle when hitting submit
   onSubmit(profileInput) {
     const { dispatch } = this.props;
     const { profile } = this.state;
@@ -45,6 +49,7 @@ class Profile extends Component {
       });
   }
 
+    //render the user interface
   render() {
     const { isEditing, profile } = this.state;
     if (isEditing) {
@@ -76,7 +81,7 @@ class Profile extends Component {
     );
   }
 }
-
+    //required fields
 Profile.propTypes = {
   profile: CustomPropTypes.profile.isRequired,
 };

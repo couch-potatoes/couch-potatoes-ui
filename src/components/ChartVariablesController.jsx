@@ -10,6 +10,7 @@ import GenderSelectField from './GenderSelectField';
 import SportSelectField from './SportSelectField';
 import dates from '../util/dates';
 
+    //function to control chart data
 const ChartVariablesController = (props) => {
   const {
     handleChartTypeChange,
@@ -25,6 +26,7 @@ const ChartVariablesController = (props) => {
     },
   } = props;
 
+    //return pieces to show user input for charts
   return (
     <Card>
       <ChartTypeSelector

@@ -1,5 +1,6 @@
 import React from 'react';
 
+    //component for when requested page is not found
 class NotFound extends React.Component {
 
   render() {

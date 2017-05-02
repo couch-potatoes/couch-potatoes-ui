@@ -4,6 +4,7 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
+    //function or menu bar, action on sign out button
 const Menu = ({ signOut }) => (
   <IconMenu
     iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}

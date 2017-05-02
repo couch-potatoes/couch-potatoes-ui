@@ -14,6 +14,7 @@ import StatusCard from '../components/StatusCard';
 import CustomPropTypes from '../util/custom-prop-types';
 import dates from '../util/dates';
 
+    //function to define default entries 
 const defaultStatusEntry = () => ({
   breakfast: false,
   calories: 0,
@@ -30,6 +31,7 @@ const defaultStatusEntry = () => ({
   stressLevel: 0,
 });
 
+    //component for StatusLog page
 class StatusLog extends Component {
   constructor (props) {
     super(props);
@@ -53,11 +55,13 @@ class StatusLog extends Component {
     this.saveEntry = this.saveEntry.bind(this);
   }
 
+    //load data to the fields
   componentDidMount() {
     const { currentDate } = this.state;
     this.loadStatusEntry(currentDate.toDateString());
   }
 
+    //function to handle when saving entries
   saveEntry() {
     const { dispatch } = this.props;
     const {
@@ -80,6 +84,7 @@ class StatusLog extends Component {
       });
   }
 
+    //function to handle when loading status entries
   loadStatusEntry(date) {
     const dateToFetch = typeof date === 'string' ? date : date.toDateString();
     const { statusLog } = this.props;
@@ -96,6 +101,7 @@ class StatusLog extends Component {
     }
   }
 
+    //function to handle when expending any of the cards
   handleCardExpandedChange(section) {
     return (newState) => {
       this.setState({
@@ -107,6 +113,7 @@ class StatusLog extends Component {
     };
   }
 
+    //function to handle when expending all cards
   expandAll() {
     this.setState({
       isOpened: {
@@ -117,6 +124,7 @@ class StatusLog extends Component {
     });
   }
 
+    //function to handle when collapsing all cards
   collapseAll() {
     this.setState({
       isOpened: {
@@ -127,6 +135,7 @@ class StatusLog extends Component {
     });
   }
 
+    //function to handle when slider position is changed
   makeSliderChangeHandler(name) {
     return (_, newValue) => {
       this.setState({
@@ -138,6 +147,7 @@ class StatusLog extends Component {
     };
   }
 
+    //function to handle when changing the date
   handleDateChange(_, date) {
     this.setState({
       currentDate: date,
@@ -146,6 +156,7 @@ class StatusLog extends Component {
     this.loadStatusEntry(date.toDateString());
   }
 
+    //function to handle when changing any other input
   handleInputChange(event) {
     const {
       target: {
@@ -180,6 +191,7 @@ class StatusLog extends Component {
     }
   }
 
+    //render the user interface
   render() {
     const {
       currentDate,
@@ -225,6 +237,7 @@ class StatusLog extends Component {
   }
 }
 
+    //properties needed for status log page
 StatusLog.propTypes = {
   statusLog: CustomPropTypes.statusLog.isRequired,
 };

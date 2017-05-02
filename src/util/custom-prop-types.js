@@ -1,5 +1,6 @@
 import { PropTypes } from 'react';
 
+    //properties needed for status entries
 const statusEntry = PropTypes.shape({
   eatAfter: PropTypes.bool.isRequired,
   eatBefore: PropTypes.bool.isRequired,
@@ -16,8 +17,10 @@ const statusEntry = PropTypes.shape({
   stressLevel: PropTypes.number.isRequired,
 });
 
+    //properties needed for status log
 const statusLog = PropTypes.objectOf(statusEntry);
 
+    //properties needed for profile
 const profile = PropTypes.shape({
   age: PropTypes.number,
   gender: PropTypes.string,
@@ -26,8 +29,10 @@ const profile = PropTypes.shape({
   weight: PropTypes.number,
 });
 
+    //properties needed for determining participant or researcher
 const userType = PropTypes.oneOf([ '', 'participant', 'researcher']);
 
+    //export default values
 export default {
   profile,
   statusEntry,

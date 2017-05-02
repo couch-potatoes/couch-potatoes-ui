@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 
 import { Paper } from 'material-ui';
 
+    //component for home page
 export class Home extends Component {
   render() {
     const { userType } = this.props;
+
+        //section to show when user is a researcher
     if (userType === 'researcher') {
       return (
         <div>
@@ -38,6 +41,8 @@ export class Home extends Component {
         </div>
       );
     }
+
+        //section to show if user is a participant
     return (
       <div>
         <Link to="/status">
@@ -62,11 +67,12 @@ export class Home extends Component {
     );
   }
 }
-
+    //determination of user being participant or researcher is required
 Home.propTypes = {
   userType: PropTypes.oneOf(['participant', 'researcher']).isRequired,
 };
 
+    //get the user type
 const mapStateToProps = (state) => {
   const {
     account: {

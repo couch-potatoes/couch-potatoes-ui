@@ -5,6 +5,7 @@ import {
   CardTitle,
 } from 'material-ui';
 
+    /* constant function to return a card with developer information */
 const About = () => (
   <Card>
     <CardTitle

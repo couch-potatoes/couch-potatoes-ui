@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Chart } from 'react-google-charts';
 
+    //line chart
 const lineChartOptions = {
   title: 'Daily Nutritional Statistics as Reported by Students',
   hAxis: { title: 'Date' },
@@ -8,6 +9,7 @@ const lineChartOptions = {
   legend: 'all',
 };
 
+    //bar chart
 const barChartOptions = {
   title: 'Daily Nutritional Statistics as Reported by Students',
   vAxis: { title: 'Amount' },
@@ -15,6 +17,7 @@ const barChartOptions = {
   legend: 'all',
 };
 
+    //display the charts for given data
 const ChartDisplayer = ({ chartData }) => {
   if (chartData.length) {
     return (
