@@ -58,7 +58,7 @@ export const logout = () => {
   };
 };
 
-export const createUser = (accountData, isResearcher = false) => (
+export const createUser = (accountData, isResearcher = false) => () => (
   axios({
     method: 'POST',
     url: isResearcher ? researcherEndpoint : participantEndpoint,
@@ -68,7 +68,7 @@ export const createUser = (accountData, isResearcher = false) => (
 
 export const registerUser = (accountData, isResearcher = false) => {
   return (dispatch) => {
-    return createUser(accountData, isResearcher)
+    return dispatch(createUser(accountData, isResearcher))
       .then(() => {
         // Log the user in if registration was successful
         const { email, password } = accountData;
